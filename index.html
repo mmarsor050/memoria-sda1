@@ -1,0 +1,1130 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Memoria Hecho a medida</title>
+<meta name="description" content="Memoria técnica online del proyecto Hecho a medida (soporte de móvil), Tecnología 4.º ESO.">
+<style>
+:root{
+  --bg:#f4f6f9; --card:#ffffff; --ink:#1d2433; --muted:#5d6676; --line:#d5dbe4; --soft:#eaf1fb;
+  --blue:#2e75b6; --blue-d:#1f4f80; --red:#c00000; --green:#2e7d32; --amber:#fff4d6; --amber-b:#e0a800;
+  --en:#6b7280; --focus:#ffbf47;
+  --fs:18px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#14181f; --card:#1d232d; --ink:#e8ecf2; --muted:#a3acba; --line:#333c4a; --soft:#1e2e44;
+    --blue:#5aa2e6; --blue-d:#8cc2f5; --red:#ff6b6b; --green:#66bb6a; --amber:#3a3220; --amber-b:#c9a227; --en:#9aa3b2;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#14181f; --card:#1d232d; --ink:#e8ecf2; --muted:#a3acba; --line:#333c4a; --soft:#1e2e44;
+  --blue:#5aa2e6; --blue-d:#8cc2f5; --red:#ff6b6b; --green:#66bb6a; --amber:#3a3220; --amber-b:#c9a227; --en:#9aa3b2;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font:400 var(--fs)/1.5 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+button,input,select,textarea{font:inherit;color:inherit}
+a{color:var(--blue)}
+.en{color:var(--en);font-style:italic;font-size:.86em}
+.es + .en{display:block}
+.inline .es + .en{display:inline;margin-left:.4em}
+[hidden]{display:none!important}
+
+/* Barra superior */
+header.top{position:sticky;top:0;z-index:20;background:var(--blue);color:#fff;box-shadow:0 2px 6px #0003}
+.top-in{max-width:1180px;margin:0 auto;display:flex;align-items:center;gap:8px;padding:8px 12px;flex-wrap:wrap}
+.brand{font-weight:700;font-size:1.05rem;margin-right:auto;line-height:1.2}
+.brand small{display:block;font-weight:400;opacity:.85;font-size:.75rem}
+.tbtn{background:#ffffff22;border:1px solid #ffffff55;color:#fff;border-radius:10px;padding:7px 12px;cursor:pointer;font-size:.9rem;white-space:nowrap}
+.tbtn:hover{background:#ffffff33}
+.tbtn.main{background:#fff;color:var(--blue-d);font-weight:700;border-color:#fff}
+select.tsel{background:#ffffff22;border:1px solid #ffffff55;color:#fff;border-radius:10px;padding:7px 8px;font-size:.9rem}
+select.tsel option{color:#000}
+.progress{height:6px;background:#ffffff33}
+.progress > i{display:block;height:100%;background:#9fe0a5;width:0;transition:width .3s}
+.modebadge{background:#fff3;border-radius:999px;padding:2px 10px;font-size:.78rem}
+
+/* Distribución */
+.wrap{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:270px 1fr;gap:18px;padding:16px}
+nav.side{position:sticky;top:78px;align-self:start;max-height:calc(100vh - 96px);overflow:auto;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:8px}
+nav.side button{display:flex;gap:8px;align-items:flex-start;width:100%;text-align:left;background:none;border:0;border-radius:10px;padding:8px 10px;cursor:pointer;font-size:.92rem;line-height:1.3}
+nav.side button:hover{background:var(--soft)}
+nav.side button.on{background:var(--soft);font-weight:700;outline:2px solid var(--blue)}
+nav.side .st{flex:0 0 1.4em;text-align:center}
+.mobnav{display:none}
+main{min-width:0}
+@media (max-width:900px){
+  .wrap{grid-template-columns:1fr;padding:10px 16px}
+  nav.side{display:none}
+  .mobnav{display:block;margin-bottom:10px}
+  .mobnav select{width:100%;padding:10px;border-radius:12px;border:1px solid var(--line);background:var(--card);font-size:1rem}
+  :root{--fs:17px}
+}
+
+/* Página */
+.page{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 22px;margin-bottom:16px}
+.ph{display:flex;align-items:center;gap:10px;margin:-20px -22px 16px;padding:14px 22px;border-radius:16px 16px 0 0;color:#fff}
+.ph h1{margin:0;font-size:1.35rem;line-height:1.25}
+.ph h1 .en{color:#ffffffcc;font-size:.8em;display:block}
+.ph .tipo{margin-left:auto;font-size:.85rem;background:#ffffff2e;border-radius:999px;padding:3px 10px;white-space:nowrap}
+.que{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+.que > div{background:var(--soft);border-radius:12px;padding:10px 14px}
+.que b{display:block;color:var(--blue-d);font-size:.85rem;text-transform:uppercase;letter-spacing:.03em}
+@media (max-width:640px){.que{grid-template-columns:1fr}}
+.pasos{background:var(--soft);border-left:5px solid var(--blue);border-radius:10px;padding:10px 14px;margin:0 0 14px}
+.pasos ol{margin:.3em 0 0;padding-left:1.4em}
+.pasos li{margin:.25em 0}
+.ej{background:var(--amber);border-left:5px solid var(--amber-b);border-radius:10px;padding:10px 14px;margin:0 0 14px}
+.ej b.t{display:block;font-size:.85rem;text-transform:uppercase;letter-spacing:.03em}
+details.help{border:1px dashed var(--line);border-radius:10px;padding:6px 12px;margin:0 0 14px;background:var(--card)}
+details.help summary{cursor:pointer;font-weight:600;color:var(--blue-d)}
+details.help svg{max-width:100%;height:auto;display:block;margin:8px auto}
+
+.f{border-top:1px solid var(--line);padding:14px 0}
+.f:first-of-type{border-top:0}
+.q{font-weight:600;margin-bottom:8px;display:flex;gap:8px;align-items:flex-start}
+.q .txt{flex:1}
+.star{color:var(--red);font-weight:800}
+.say{border:1px solid var(--line);background:var(--card);border-radius:999px;cursor:pointer;padding:0 8px;font-size:.9rem;line-height:1.8;flex:0 0 auto}
+.say:hover{background:var(--soft)}
+input[type=text],input[type=number],textarea,select.inp{width:100%;border:2px solid var(--line);background:var(--card);border-radius:10px;padding:9px 12px}
+input[type=number]{max-width:9em}
+textarea{min-height:5.2em;resize:vertical}
+input:focus,textarea:focus,select:focus,button:focus-visible,.slot:focus{outline:3px solid var(--focus);outline-offset:1px}
+.unit{margin-left:6px;color:var(--muted)}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opt{display:flex;align-items:center;gap:8px;border:2px solid var(--line);border-radius:12px;padding:8px 12px;cursor:pointer;background:var(--card);min-height:46px}
+.opt input{width:20px;height:20px;accent-color:var(--blue)}
+.opt:has(input:checked){border-color:var(--blue);background:var(--soft)}
+.opt.wide{flex:1 1 100%}
+table.t{border-collapse:collapse;width:100%;font-size:.95rem}
+table.t th,table.t td{border:1px solid var(--line);padding:7px 8px;text-align:left;vertical-align:middle}
+table.t th{background:var(--soft);font-weight:700}
+table.t td.c,table.t th.c{text-align:center}
+table.t input[type=radio]{width:22px;height:22px;accent-color:var(--blue)}
+.tscroll{overflow-x:auto}
+.bank{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.chip{border:1px solid var(--blue);color:var(--blue-d);background:var(--soft);border-radius:999px;padding:3px 12px;cursor:pointer;font-size:.9rem}
+.frase{line-height:2.5}
+.frase input{display:inline-block;width:auto;min-width:9em;max-width:100%;padding:4px 8px;border-width:0 0 2px;border-radius:0;background:transparent}
+.calc{background:var(--soft);border-radius:10px;padding:10px 14px;font-weight:600}
+.ok{color:var(--green);font-weight:700}
+.bad{color:var(--red);font-weight:700}
+.note{color:var(--muted);font-size:.92rem}
+.sub{font-size:1.08rem;font-weight:700;margin:16px 0 4px;color:var(--blue-d)}
+.cardv{border:2px solid var(--line);border-radius:14px;padding:12px 16px;background:var(--card)}
+.cardv .big{font-size:1.5rem;font-weight:800}
+.cardv .prob{font-weight:700;text-decoration:underline;margin:6px 0}
+.cardv table{margin-top:8px}
+
+/* Fotos */
+.slot{border:2px dashed var(--line);border-radius:14px;padding:12px;text-align:center;background:var(--bg)}
+.slot img{max-width:100%;max-height:360px;border-radius:8px;display:block;margin:0 auto 8px}
+.slot .btns{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.btn{border:2px solid var(--blue);background:var(--card);color:var(--blue-d);border-radius:12px;padding:9px 14px;cursor:pointer;font-weight:600}
+.btn:hover{background:var(--soft)}
+.btn.pri{background:var(--blue);color:#fff}
+.btn.pri:hover{filter:brightness(1.08)}
+.btn.sm{padding:5px 10px;font-size:.88rem}
+.btn.del{border-color:var(--red);color:var(--red)}
+
+/* Pie de página */
+.pfoot{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-top:16px;padding-top:14px;border-top:2px solid var(--line)}
+.falta{background:#fdecec;color:#7a1010;border-radius:10px;padding:10px 14px;margin-top:12px}
+:root[data-theme="dark"] .falta{background:#3a1d1d;color:#ffc9c9}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .falta{background:#3a1d1d;color:#ffc9c9}}
+.done{background:#e6f4ea;color:#14532d;border-radius:10px;padding:10px 14px;margin-top:12px;font-weight:600}
+:root[data-theme="dark"] .done{background:#1d3324;color:#bfe6c8}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .done{background:#1d3324;color:#bfe6c8}}
+.stepnav{display:flex;justify-content:space-between;gap:10px;margin-top:12px}
+.stepcount{color:var(--muted);font-size:.9rem;text-align:center;margin-top:6px}
+
+/* Modales y avisos */
+.modal{position:fixed;inset:0;background:#0008;z-index:50;display:flex;align-items:flex-start;justify-content:center;padding:4vh 12px;overflow:auto}
+.modal .box{background:var(--card);border-radius:16px;max-width:720px;width:100%;padding:20px 22px;box-shadow:0 10px 40px #0006}
+.modal h2{margin:0 0 10px;font-size:1.3rem}
+.modal textarea.code{font-family:ui-monospace,Consolas,monospace;font-size:.82rem;min-height:9em;word-break:break-all}
+.modal .row{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:#1d2433;color:#fff;padding:12px 18px;border-radius:12px;z-index:60;box-shadow:0 6px 20px #0005;max-width:92vw}
+.gl{border:0;background:none;padding:0;color:inherit;text-decoration:underline dotted var(--blue) 2px;text-underline-offset:3px;cursor:help;font:inherit}
+.glpop{position:absolute;z-index:70;max-width:320px;background:var(--card);border:2px solid var(--blue);border-radius:12px;padding:10px 12px;box-shadow:0 8px 24px #0004;font-size:.92rem}
+.guide{counter-reset:g;list-style:none;padding:0;margin:8px 0}
+.guide li{counter-increment:g;display:flex;gap:10px;align-items:flex-start;margin:8px 0}
+.guide li::before{content:counter(g);flex:0 0 30px;height:30px;border-radius:50%;background:var(--blue);color:#fff;display:grid;place-items:center;font-weight:700}
+
+/* Vista de impresión */
+#print{display:none}
+@media print{
+  @page{size:A4;margin:12mm}
+  body{background:#fff;color:#000;font-size:11pt}
+  header.top,.wrap,.modal,.toast,.glpop{display:none!important}
+  #print{display:block}
+  .en{color:#555}
+}
+.rep .pp{page-break-after:always;break-after:page}
+.rep .pp:last-child{page-break-after:auto}
+.rep h2 .en{color:#e8f0fa}
+.rep h2{background:#2e75b6;color:#fff;padding:6px 10px;margin:0 0 8px;font-size:14pt;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.rep .pq{margin:7px 0 2px;font-weight:700;font-size:10.5pt}
+.rep .pa{border-bottom:1px solid #999;min-height:1.4em;padding:1px 4px;white-space:pre-wrap;font-size:10.5pt}
+.rep .pa.empty{min-height:1.6em}
+.rep .pa.big{min-height:4.8em}
+.rep table{border-collapse:collapse;width:100%;font-size:9.5pt;margin:3px 0}
+.rep th,.rep td{border:1px solid #888;padding:3px 5px;text-align:left}
+.rep img{max-width:100%;max-height:85mm;display:block;margin:4px 0}
+.rep .pbox{border:1.5px dashed #888;height:55mm;display:flex;align-items:center;justify-content:center;color:#777;font-size:9pt}
+.rep .firma{display:flex;justify-content:space-between;gap:10px;margin-top:10px;border:1px solid #888;padding:6px 8px;font-size:9pt;min-height:16mm}
+.rep .cover{font-size:11pt}
+.rep .cover h1{font-size:22pt;margin:0}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="top-in">
+    <div class="brand">Hecho a medida · Memoria técnica<small>Made to measure · Technical report — Tecnología 4.º ESO</small></div>
+    <span class="modebadge" id="modebadge" hidden>Refuerzo</span>
+    <select class="tsel" id="lang" aria-label="Idioma / Language">
+      <option value="both">ES + EN</option>
+      <option value="es">Español</option>
+      <option value="en">English</option>
+    </select>
+    <button class="tbtn main" id="bSave">💾 Guardar código</button>
+    <button class="tbtn" id="bLoad">📂 Continuar</button>
+    <button class="tbtn" id="bMore" aria-haspopup="true">☰ Más</button>
+  </div>
+  <div class="progress"><i id="prog"></i></div>
+</header>
+
+<div class="wrap">
+  <nav class="side" id="side" aria-label="Páginas"></nav>
+  <main>
+    <div class="mobnav"><select id="mobsel" aria-label="Página"></select></div>
+    <div id="page"></div>
+  </main>
+</div>
+<div id="print" class="rep"></div>
+
+<script>
+'use strict';
+/* =========================================================
+   Memoria técnica online · SdA 1 «Hecho a medida» · 4.º ESO
+   Autor: Manuel Martín Soriano · Licencia CC BY-SA 4.0
+   Todo se guarda en este navegador y en el código del alumno.
+   ========================================================= */
+
+const APP = 'sda1-memoria';
+const VERSION = 1;
+const PLA_EUR_G = 0.015;            // 15 €/kg
+const LIMITS = {L:120, A:100, H:130, horas:2};
+
+/* ---------- utilidades de texto bilingüe ---------- */
+const L = (es, en) => ({es, en: en || ''});
+const S = {lang:'both', mode:'n', page:0, data:{}, step:{}, photos:{}, lastCode:0, dirty:false};
+
+function esc(s){return String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function gl(s){ // [[clave|texto]] o [[clave]] -> botón de glosario
+  return s.replace(/\[\[([^\]|]+)(?:\|([^\]]+))?\]\]/g, (m,k,t)=>`<button type="button" class="gl" data-gl="${esc(k)}">${t||k}</button>`);
+}
+function plain(s){return String(s||'').replace(/\[\[([^\]|]+)(?:\|([^\]]+))?\]\]/g,(m,k,t)=>t||k).replace(/<[^>]+>/g,'');}
+function tx(o, lang){ if(o==null) return ''; if(typeof o==='string') return o; lang = lang||S.lang;
+  if(lang==='es') return o.es; if(lang==='en') return o.en||o.es; return o.es; }
+function bi(o, inline){ // HTML bilingüe
+  if(o==null) return ''; if(typeof o==='string') return gl(o);
+  if(S.lang==='es') return `<span class="es">${gl(o.es)}</span>`;
+  if(S.lang==='en') return `<span class="es">${gl(o.en||o.es)}</span>`;
+  if(!o.en) return `<span class="es">${gl(o.es)}</span>`;
+  return `<span class="${inline?'inline':''}"><span class="es">${gl(o.es)}</span><span class="en">${gl(o.en)}</span></span>`;
+}
+function biP(o){ // para impresión: ES + EN en línea
+  if(o==null) return ''; if(typeof o==='string') return esc(plain(o));
+  if(S.lang==='es') return esc(plain(o.es)); if(S.lang==='en') return esc(plain(o.en||o.es));
+  return esc(plain(o.es)) + (o.en?` <span class="en">${esc(plain(o.en))}</span>`:'');
+}
+function sayText(o){ if(typeof o==='string') return plain(o); return plain(S.lang==='en' ? (o.en||o.es) : o.es); }
+
+/* ---------- glosario ---------- */
+const GLOS = {
+  'ranura': L('Hueco estrecho del soporte donde entra el borde del móvil.','Slot: the narrow gap where the phone edge goes.'),
+  'cota': L('Medida escrita en un dibujo técnico, en milímetros.','Dimension: a measurement written on a technical drawing, in mm.'),
+  'alzado': L('Dibujo de la pieza vista de frente.','Front view: the part seen from the front.'),
+  'planta': L('Dibujo de la pieza vista desde arriba.','Top view: the part seen from above.'),
+  'perfil': L('Dibujo de la pieza vista de lado.','Side view: the part seen from the side.'),
+  'croquis': L('Dibujo a mano con vistas y cotas.','Technical sketch: a freehand drawing with views and dimensions.'),
+  'STL': L('Tipo de archivo 3D que entiende el laminador.','3D file type that the slicer can read.'),
+  'laminador': L('Programa que corta la pieza en capas y prepara la impresión (Creality Print, Bambu Studio, Kiri:Moto).','Slicer: software that cuts the part into layers and prepares the print.'),
+  'relleno': L('Cuánto plástico hay dentro de la pieza, en %. Más relleno = más fuerte y más plástico.','Infill: how much plastic is inside the part, in %.'),
+  'altura de capa': L('Grosor de cada capa de plástico, en mm (normalmente 0,2 mm).','Layer height: thickness of each plastic layer, in mm.'),
+  'soportes de impresión': L('Estructuras que pone el laminador para sujetar partes en el aire. Gastan plástico y hay que quitarlas.','Print supports: structures that hold parts in the air. They waste plastic.'),
+  'PLA': L('Plástico fácil de imprimir. Solo se composta en plantas industriales.','Easy-to-print plastic. It only composts in industrial plants.'),
+  'agrupar': L('Unir varias formas de Tinkercad en una sola pieza (Ctrl + G).','Group: join several Tinkercad shapes into one part (Ctrl + G).'),
+  'hueco': L('Forma de Tinkercad que resta (agujerea) en vez de sumar.','Hole: a Tinkercad shape that cuts instead of adding.'),
+  'requisito': L('Lo que el producto tiene que cumplir para el cliente.','Requirement: what the product must do for the client.'),
+  'cliente': L('Persona para la que se diseña el producto. Aquí, la de tu tarjeta.','Client: the person the product is designed for (your card).'),
+  'orificio': L('Agujero redondo. Por ejemplo, para pasar el cable de carga.','Hole: a round hole, e.g. for the charging cable.'),
+  'antideslizante': L('Material o zona que evita que el soporte resbale.','Non-slip: material or area that stops the stand sliding.'),
+  'diámetro': L('Anchura de un círculo pasando por el centro. Se escribe Ø.','Diameter: width of a circle through its centre (Ø).'),
+  'necesidad': L('Problema real que tiene el cliente.','Need: a real problem the client has.'),
+  'deseo': L('Algo que estaría bien, pero sin ello no pasa nada.','Wish: nice to have, but nothing bad happens without it.'),
+  'escala': L('Relación entre el tamaño del dibujo y el real. Escala 1:2 = el dibujo mide la mitad.','Scale: drawing size vs real size. 1:2 = half size.'),
+  'perspectiva isométrica': L('Dibujo en 3D donde las líneas van verticales o a 30°.','Isometric view: a 3D drawing with vertical lines and lines at 30°.'),
+  'proceso tecnológico': L('Los pasos para resolver un problema con un producto: problema, información, diseño, planificación, fabricación, evaluación y difusión.','Technological process: the steps to solve a problem with a product.'),
+};
+
+/* ---------- tarjetas de situación ---------- */
+const CARDS = [
+ {n:0, emoji:'🍳', nombre:'Antonio', rol:L('Jubilado, cocina para su familia','Retired, cooks for his family'),
+  prob:L('Cuando remueve la olla, el móvil se resbala y se cae a la encimera mojada.','When he stirs the pot, the phone slips and falls onto the wet worktop.'),
+  uso:'V', pos:L('De pie','Standing'), cable:false, extra:L('La encimera suele estar mojada.','The worktop is often wet.')},
+ {n:1, emoji:'🍹', nombre:'Lucía', rol:L('Camarera en un chiringuito de la playa','Waitress at a beach bar'),
+  prob:L('Con el móvil tumbado en la barra no ve los pedidos nuevos sin dejar lo que está haciendo.','With the phone lying flat on the bar she cannot see new orders without stopping.'),
+  uso:'V', pos:L('De pie','Standing'), cable:false, extra:L('Salpicaduras de agua y hielo.','Splashes of water and ice.')},
+ {n:2, emoji:'📞', nombre:'Peter', rol:L('Jubilado inglés que vive en La Cancelada','Retired Englishman living in La Cancelada'),
+  prob:L('Se le cansa el brazo de sujetar el móvil y la imagen se mueve todo el rato.','His arm gets tired holding the phone and the image keeps moving.'),
+  uso:'H', pos:L('Sentado','Sitting'), cable:true, extra:L('No ve bien de cerca.','He does not see well up close.')},
+ {n:3, emoji:'🛵', nombre:'Youssef', rol:L('Repartidor en moto','Motorbike delivery rider'),
+  prob:L('El móvil cargando queda tumbado en la mesa y tiene que cogerlo cada vez que mira el mapa.','The charging phone lies flat on the table and he has to pick it up every time he checks the map.'),
+  uso:'V', pos:L('Sentado','Sitting'), cable:true, extra:L('Las mesas del bar son muy pequeñas.','The café tables are very small.')},
+ {n:4, emoji:'🌿', nombre:'Rosa', rol:L('Jardinera en una urbanización','Gardener at a housing estate'),
+  prob:L('Con las manos ocupadas y los guantes puestos, no puede sujetar el móvil para ver el vídeo.','With her hands busy and gloves on, she cannot hold the phone to watch the video.'),
+  uso:'H', pos:L('De pie','Standing'), cable:false, extra:L('Hace viento y la mesa no es plana.','It is windy and the table is not flat.')},
+ {n:5, emoji:'📚', nombre:'Daniela', rol:L('Estudiante de 4.º de ESO','Year 10 student'),
+  prob:L('Si apoya el móvil en los libros, se cae cada vez que pasa una página.','If she leans the phone on her books, it falls every time she turns a page.'),
+  uso:'H', pos:L('Sentada','Sitting'), cable:true, extra:L('Necesita sitio en la mesa para el cuaderno.','She needs desk space for her notebook.')},
+ {n:6, emoji:'⚓', nombre:'José', rol:L('Pescador del puerto de Estepona','Fisherman at Estepona harbour'),
+  prob:L('Deja el móvil en el suelo o en una caja y tiene que parar para mirarlo.','He leaves the phone on the ground or on a box and has to stop to look at it.'),
+  uso:'V', pos:L('Sentado en un taburete','Sitting on a stool'), cable:false, extra:L('Humedad y salitre del mar.','Sea damp and salt.')},
+ {n:7, emoji:'🛎️', nombre:'Mercedes', rol:L('Recepcionista de un hotel de la costa','Receptionist at a coastal hotel'),
+  prob:L('Tiene que girar el móvil para que el cliente lea la traducción y ella deja de verla.','She has to turn the phone so the guest can read it, and then she cannot see it.'),
+  uso:'V', pos:L('De pie','Standing'), cable:true, extra:L('Dos personas tienen que ver la pantalla.','Two people must see the screen.')},
+ {n:8, emoji:'🔧', nombre:'Iker', rol:L('Mecánico en un taller','Mechanic in a workshop'),
+  prob:L('Tiene las manos llenas de grasa y no puede tocar el móvil para verlo mejor.','His hands are covered in grease and he cannot touch the phone to see it better.'),
+  uso:'H', pos:L('De pie','Standing'), cable:false, extra:L('El banco vibra al usar herramientas.','The bench shakes when using tools.')},
+];
+const card = n => CARDS.find(c => String(c.n) === String(n));
+const USO = {V:L('📱 Vertical','Portrait'), H:L('📱 Horizontal','Landscape')};
+
+/* ---------- dibujos de ayuda (SVG) ---------- */
+const SVG_MEDIR = `<svg viewBox="0 0 420 150" role="img" aria-label="Cómo medir el grosor del móvil"><rect x="40" y="30" width="26" height="100" rx="6" fill="#cfd8e3" stroke="#555"/><text x="53" y="22" text-anchor="middle" font-size="12">móvil + funda</text><rect x="90" y="30" width="300" height="34" fill="#fff8cc" stroke="#999"/><g stroke="#555">${Array.from({length:31},(_,i)=>`<line x1="${100+i*9}" y1="64" x2="${100+i*9}" y2="${i%5?56:50}"/>`).join('')}</g><text x="240" y="48" text-anchor="middle" font-size="12">regla · ruler (mm)</text><line x1="40" y1="140" x2="66" y2="140" stroke="#c00000" stroke-width="2"/><polygon points="40,140 46,136 46,144" fill="#c00000"/><polygon points="66,140 60,136 60,144" fill="#c00000"/><text x="80" y="144" font-size="14" fill="#c00000" font-weight="bold">grosor = 9 mm</text></svg>`;
+const SVG_RANURA = `<svg viewBox="0 0 420 170" role="img" aria-label="Ranura y móvil"><path d="M40 140 L200 140 L200 120 L130 120 L130 60 L112 60 L112 120 L58 120 L58 30 L40 30 Z" fill="#e3ebf5" stroke="#555"/><rect x="114" y="20" width="14" height="98" fill="#cfd8e3" stroke="#333" transform="rotate(0)"/><line x1="112" y1="155" x2="130" y2="155" stroke="#2e75b6" stroke-width="2"/><text x="121" y="168" text-anchor="middle" font-size="12" fill="#2e75b6">ranura</text><text x="230" y="60" font-size="13">ranura − grosor del móvil:</text><text x="230" y="82" font-size="13" fill="#c00000">menos de 0 → no cabe</text><text x="230" y="102" font-size="13" fill="#b8860b">0 a 1 mm → justo</text><text x="230" y="122" font-size="13" fill="#2e7d32">1 a 4 mm → bien</text><text x="230" y="142" font-size="13" fill="#555">más de 4 mm → suelto</text></svg>`;
+const SVG_VISTAS = `<svg viewBox="0 0 420 230" role="img" aria-label="Posición de las vistas"><rect x="40" y="20" width="120" height="90" fill="#e3ebf5" stroke="#2e75b6"/><text x="100" y="70" text-anchor="middle" font-size="14" font-weight="bold">ALZADO</text><rect x="190" y="20" width="70" height="90" fill="#f2f2f2" stroke="#555"/><text x="225" y="70" text-anchor="middle" font-size="12">PERFIL</text><rect x="40" y="135" width="120" height="70" fill="#f2f2f2" stroke="#555"/><text x="100" y="175" text-anchor="middle" font-size="12">PLANTA</text><line x1="160" y1="20" x2="190" y2="20" stroke="#9dc3e6" stroke-dasharray="4 3"/><line x1="160" y1="110" x2="190" y2="110" stroke="#9dc3e6" stroke-dasharray="4 3"/><line x1="40" y1="110" x2="40" y2="135" stroke="#9dc3e6" stroke-dasharray="4 3"/><line x1="160" y1="110" x2="160" y2="135" stroke="#9dc3e6" stroke-dasharray="4 3"/><text x="285" y="45" font-size="12">Perfil: a la DERECHA</text><text x="285" y="62" font-size="12">del alzado</text><text x="200" y="165" font-size="12">Planta: DEBAJO</text><text x="200" y="182" font-size="12">del alzado</text></svg>`;
+const SVG_CODIGO = `<svg viewBox="0 0 420 120" role="img" aria-label="Guardar el código en Drive"><rect x="10" y="20" width="110" height="70" rx="10" fill="#e3ebf5" stroke="#2e75b6"/><text x="65" y="50" text-anchor="middle" font-size="13">💾 Guardar</text><text x="65" y="70" text-anchor="middle" font-size="13">📋 Copiar</text><path d="M128 55 L170 55" stroke="#555" stroke-width="3" marker-end="url(#a)"/><rect x="178" y="20" width="110" height="70" rx="10" fill="#fff" stroke="#555"/><text x="233" y="45" text-anchor="middle" font-size="13">Drive → Nuevo</text><text x="233" y="65" text-anchor="middle" font-size="13">→ Documento</text><path d="M296 55 L338 55" stroke="#555" stroke-width="3" marker-end="url(#a)"/><rect x="346" y="20" width="66" height="70" rx="10" fill="#e6f4ea" stroke="#2e7d32"/><text x="379" y="50" text-anchor="middle" font-size="13">Ctrl+V</text><text x="379" y="70" text-anchor="middle" font-size="12">pegar</text><defs><marker id="a" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="#555"/></marker></defs></svg>`;
+
+/* ---------- PÁGINAS ----------
+   Tipos de campo: text, area, num, radio, checks, table, frase, photo, calc, card, reqcheck, ranura, mods, matrix, fases, carita, download, html, sub
+   only:'n' = solo modo normal · only:'r' = solo modo refuerzo · req:true = mínimo ★                                      */
+const BANK_PORQUE = [L('es más estable','it is more stable'), L('es más fácil de imprimir','it is easier to print'), L('es el que mejor me ha salido','it came out best'), L('el profe lo recomienda','the teacher recommends it'), L('lo sé modificar','I know how to change it')];
+const COLORS = ['#5d6676','#c55a11','#7f6000','#2e75b6','#1f6f8b','#7030a0','#548235','#bf8f00','#c00000','#2e7d32','#1f3864','#7f6000','#1f3864','#2e75b6'];
+
+const PAGES = [
+{ id:'inicio', icon:'🏁', tipo:'📄', title:L('Empezamos','Let\'s start'),
+  que:L('Escribes tus datos y aprendes a guardar.','You write your details and learn how to save.'),
+  para:L('Para no perder nunca tu trabajo.','So you never lose your work.'),
+  pasos:[L('Escribe tu nombre y tu grupo.','Write your name and class.'), L('Marca si trabajas en pareja o solo/a.','Tick if you work in a pair or alone.'), L('Lee el cuadro amarillo: cómo guardar.','Read the yellow box: how to save.')],
+  ej:{t:L('Cómo guardar tu trabajo','How to save your work'), b:L('Al terminar cada día: pulsa 💾 <b>Guardar código</b> → <b>Copiar</b> → abre tu <b>Drive</b> → <b>Nuevo → Documento</b> → pega con <b>Ctrl + V</b>. Ponle de nombre «Código memoria Tecno». Otro día, en cualquier ordenador: pulsa 📂 <b>Continuar</b> y pega el código.','At the end of each day: press 💾 Save code → Copy → open your Drive → New → Document → paste with Ctrl + V. Another day, on any computer: press 📂 Continue and paste the code.')},
+  help:{t:L('Ver el dibujo','See the drawing'), svg:SVG_CODIGO},
+  fields:[
+   {t:'html', html:()=>`<div class="cardv"><div class="sub" style="margin-top:0">${bi(L('El encargo','The brief'))}</div>${bi(L('Una persona (tu [[cliente]]) necesita un sitio para su móvil. Tú diseñas un soporte en Tinkercad y se imprime en la impresora 3D. Esta memoria cuenta todo lo que has hecho.','A person (your client) needs a place for their phone. You design a stand in Tinkercad and it is 3D printed. This report tells everything you did.'))}</div>`},
+   {t:'text', id:'nombre1', q:L('Tu nombre y apellidos','Your full name'), req:true},
+   {t:'radio', id:'grupo', q:L('Tu grupo','Your class'), opts:[['4D','4.º D'],['4VD','4.º V-D'],['4E','4.º E']], req:true},
+   {t:'radio', id:'trabajo', q:L('¿Cómo trabajas ahora?','How do you work now?'), opts:[['pareja',L('👥 En pareja','In a pair')],['solo',L('👤 Individual','Alone')]], req:true},
+   {t:'text', id:'nombre2', q:L('Nombre de tu pareja (si tienes)','Your partner\'s name (if you have one)'), showIf:d=>d.trabajo==='pareja'},
+   {t:'text', id:'apodo', q:L('Tu apodo en Tinkercad','Your Tinkercad nickname')},
+   {t:'radio', id:'cambioEquipo', q:L('¿Has cambiado de equipo durante el proyecto?','Have you changed team during the project?'), opts:[['no',L('No','No')],['si',L('Sí','Yes')]]},
+   {t:'area', id:'cambioTexto', q:L('Cuéntalo: empecé con… y desde… trabajo…','Tell it: I started with… and since… I work…'), showIf:d=>d.cambioEquipo==='si', bank:[L('empecé en pareja','I started in a pair'),L('ahora trabajo solo/a','now I work alone'),L('mi compañero/a faltó','my partner was absent'),L('cambié de pareja','I changed partner')]},
+  ]},
+
+{ id:'cliente', icon:'🧑', tipo:'📄', title:L('Mi cliente','My client'),
+  que:L('Eliges tu tarjeta de situación y lees el problema.','You choose your situation card and read the problem.'),
+  para:L('Todo producto es para alguien. Esa persona es tu cliente.','Every product is for someone. That person is your client.'),
+  pasos:[L('Mira el número de tu tarjeta.','Look at your card number.'), L('Elígelo en la lista.','Choose it in the list.'), L('Lee la tarjeta que aparece.','Read the card that appears.'), L('Copia la frase subrayada (el problema).','Copy the underlined sentence (the problem).')],
+  pasosR:[L('Mira el número de tu tarjeta.','Look at your card number.'), L('Elígelo en la lista.','Choose it in the list.'), L('Lee la tarjeta. Pulsa 🔊 para escucharla.','Read the card. Press 🔊 to listen.'), L('Elige la frase del problema.','Choose the problem sentence.')],
+  fields:[
+   {t:'radio', id:'tarjeta', q:L('Número de tu tarjeta','Your card number'), opts:CARDS.map(c=>[String(c.n), `${c.emoji} ${c.n} · ${c.nombre}`]), req:true},
+   {t:'card', key:'tarjeta'},
+   {t:'area', id:'problema', q:L('★ Copia aquí la frase subrayada de tu tarjeta (el problema)','Copy the underlined sentence from your card (the problem)'), req:true, only:'n', rows:2},
+   {t:'probpick', id:'problemaR', q:L('¿Cuál es el problema de tu cliente? Elige la frase correcta.','What is your client\'s problem? Choose the right sentence.'), req:true, only:'r'},
+   {t:'radio', id:'necDeseo', q:L('El problema de tu tarjeta es una…','The problem on your card is a…'), opts:[['nec',L('😟 [[necesidad]] (le pasa de verdad)','need (it really happens)')],['des',L('✨ [[deseo]] (estaría bien)','wish (nice to have)')]], req:true, check:'nec'},
+  ]},
+
+{ id:'sketchup', icon:'🧊', tipo:'🖥️', title:L('Aprender SketchUp','Learning SketchUp'),
+  que:L('Marcas qué prácticas de SketchUp hiciste.','You tick which SketchUp exercises you did.'),
+  para:L('Para aprender a leer planos (vistas y cotas) y a dibujar en 3D.','To learn to read drawings (views and dimensions) and to draw in 3D.'),
+  pasos:[L('Mira tu SketchUp o tus fichas.','Look at your SketchUp or your sheets.'), L('Marca cada práctica: hecha, a medias o no.','Mark each one: done, half done or not.'), L('Las 1–4 son obligatorias ★. Las 5–7 suben nota.','1–4 are compulsory ★. 5–7 raise your mark.')],
+  fields:[
+   {t:'table', id:'su', q:L('Mis prácticas de SketchUp','My SketchUp exercises'), req:true, reqRows:['1','2','3','4'],
+    rows:[['1',L('1 · Soporte móvil ★','1 · Phone stand ★')],['2',L('2 · Podio ★','2 · Podium ★')],['3',L('3 · Fantasma ★','3 · Ghost ★')],['4',L('4 · Espada ★','4 · Sword ★')],['5',L('5 · Gancho (ampliación)','5 · Hook (extra)')],['6',L('6 · Gafas (ampliación)','6 · Glasses (extra)')],['7',L('7 · Reloj (ampliación)','7 · Watch (extra)')]],
+    cols:[['si',L('✔ Hecha','Done')],['medias',L('◐ A medias','Half')],['no',L('✘ No','No')]]},
+   {t:'sub', q:L('Leer un plano','Reading a drawing')},
+   {t:'html', html:()=>`<details class="help" open><summary>${bi(L('💡 Dónde va cada vista','Where each view goes'),true)}</summary>${SVG_VISTAS}</details>`},
+   {t:'radio', id:'vPlanta', q:L('¿Dónde se dibuja la [[planta]] (vista desde arriba)?','Where is the top view drawn?'), opts:[['debajo',L('⬇️ Debajo del alzado','Below the front view')],['derecha',L('➡️ A la derecha del alzado','Right of the front view')]], req:true, check:'debajo'},
+   {t:'radio', id:'vPerfil', q:L('¿Dónde se dibuja el [[perfil]] izquierdo?','Where is the left side view drawn?'), opts:[['debajo',L('⬇️ Debajo del alzado','Below the front view')],['derecha',L('➡️ A la derecha del alzado','Right of the front view')]], req:true, check:'derecha'},
+   {t:'radio', id:'vMm', q:L('Las [[cota|cotas]] se escriben…','Dimensions are written…'), opts:[['sin',L('en mm, sin poner «mm»','in mm, without "mm"')],['con',L('poniendo «mm» siempre','always with "mm"')]], check:'sin', only:'n'},
+   {t:'photo', id:'fSU', q:L('Captura de tu mejor pieza de SketchUp (opcional)','Screenshot of your best SketchUp part (optional)')},
+  ]},
+
+{ id:'tinkercad', icon:'🧱', tipo:'🖥️', title:L('Tinkercad: primeros pasos y tazas','Tinkercad: first steps and mugs'),
+  que:L('Marcas lo que sabes hacer en Tinkercad y las tazas.','You tick what you can do in Tinkercad and the mugs.'),
+  para:L('Para saber qué herramientas dominas.','To know which tools you can use.'),
+  pasos:[L('Lee cada operación.','Read each operation.'), L('Marca las que sabes hacer.','Tick the ones you can do.'), L('Marca cómo te salieron las 2 tazas.','Mark how your 2 mugs went.')],
+  fields:[
+   {t:'checks', id:'ops', q:L('¿Qué sé hacer en Tinkercad?','What can I do in Tinkercad?'), req:true, min:3, opts:[
+     ['poner',L('Poner una forma','Add a shape')],['medidas',L('Cambiar medidas (escribir el número)','Change size (type the number)')],['mover',L('Mover con flechas','Move with arrows')],['subir',L('Subir y bajar','Raise and lower')],['girar',L('Girar','Rotate')],['hueco',L('Hacer un [[hueco]]','Make a hole')],['agrupar',L('[[agrupar|Agrupar]] (Ctrl + G)','Group (Ctrl + G)')],['alinear',L('Alinear (tecla L)','Align (key L)')],['suelo',L('Bajar al suelo (tecla D)','Drop to floor (key D)')],['regla',L('Medir con la regla','Measure with the ruler')]]},
+   {t:'table', id:'tazas', q:L('Las tazas (instrucciones del INTEF)','The mugs (INTEF instructions)'), req:true, reqRows:['1','2'],
+    rows:[['1',L('Taza 1','Mug 1')],['2',L('Taza 2','Mug 2')]], cols:[['si',L('✔ Hecha','Done')],['medias',L('◐ A medias','Half')],['no',L('✘ No','No')]]},
+   {t:'photo', id:'fTaza', q:L('Captura de una taza (opcional)','Screenshot of a mug (optional)')},
+  ]},
+
+{ id:'soportes', icon:'📱', tipo:'🖥️', title:L('Mis tres soportes','My three stands'),
+  que:L('Cuentas cómo te salieron los 3 soportes.','You tell how your 3 stands went.'),
+  para:L('Para ver cómo has mejorado de uno a otro.','To see how you improved from one to the next.'),
+  pasos:[L('Soporte 1 y 2: los hiciste con los vídeos.','Stands 1 and 2: you made them with the videos.'), L('Soporte 3 «Final»: lo hiciste mirando las vistas del plano.','Stand 3 "Final": you made it from the drawing views.'), L('Marca cómo te salió cada uno y lo más difícil.','Mark how each went and the hardest part.'), L('Pega una captura de cada uno si puedes.','Paste a screenshot of each if you can.')],
+  fields:[1,2,3].flatMap(n=>[
+   {t:'sub', q: n===3 ? L('Soporte 3 «Final» (desde las vistas)','Stand 3 "Final" (from the views)') : L(`Soporte ${n} (vídeo)`,`Stand ${n} (video)`)},
+   {t:'radio', id:`s${n}Estado`, q:L('¿Cómo te salió?','How did it go?'), opts:[['ok',L('✔ Terminado','Finished')],['medias',L('◐ A medias','Half done')],['no',L('✘ No lo hice','Not done')]], req:true},
+   {t:'checks', id:`s${n}Dif`, q:L('Lo más difícil fue…','The hardest part was…'), showIf:d=>d[`s${n}Estado`] && d[`s${n}Estado`]!=='no', opts:[['medir',L('Poner las medidas','Typing the sizes')],['girar',L('Girar','Rotating')],['alinear',L('Alinear','Aligning')],['agrupar',L('Agrupar','Grouping')],['video',L('Seguir el vídeo','Following the video')],['vistas',L('Leer las vistas','Reading the views')],['nada',L('Nada','Nothing')]]},
+   {t:'photo', id:`fS${n}`, q:L(`Captura del soporte ${n}`,`Screenshot of stand ${n}`), showIf:d=>d[`s${n}Estado`] && d[`s${n}Estado`]!=='no'},
+  ])},
+
+{ id:'elijo', icon:'👉', tipo:'📄', title:L('Elijo mi soporte','I choose my stand'),
+  que:L('Eliges el soporte que vas a modificar y entregar.','You choose the stand you will modify and hand in.'),
+  para:L('Un ingeniero elige con criterios, no al azar.','An engineer chooses with criteria, not at random.'),
+  pasos:[L('Puntúa cada soporte de 1 (mal) a 3 (bien).','Score each stand from 1 (poor) to 3 (good).'), L('Mira el total.','Look at the total.'), L('Elige uno y di por qué.','Choose one and say why.')],
+  ej:{t:L('Consejo','Tip'), b:L('El profe recomienda el <b>soporte 3 «Final»</b> para modificar: es el más fácil de cambiar.','The teacher recommends stand 3 "Final" to modify: it is the easiest to change.')},
+  fields:[
+   {t:'matrix', id:'mx', only:'n'},
+   {t:'radio', id:'elegido', q:L('Elijo el soporte…','I choose stand…'), opts:[['1',L('Soporte 1','Stand 1')],['2',L('Soporte 2','Stand 2')],['3',L('Soporte 3 «Final» ⭐','Stand 3 "Final" ⭐')]], req:true},
+   {t:'frase', id:'porqueElijo', q:L('Termina la frase','Finish the sentence'), req:true,
+    tpl:L('Elijo este soporte porque {a}.','I choose this stand because {a}.'), blanks:{a:BANK_PORQUE}},
+  ]},
+
+{ id:'sirve', icon:'🔍', tipo:'📄', title:L('¿Le sirve a mi cliente?','Does it work for my client?'),
+  que:L('Compruebas si tu soporte cumple lo que pide tu tarjeta.','You check if your stand meets what your card asks.'),
+  para:L('Probar con honestidad es parte del trabajo. Si no cumple, no pasa nada: dices qué cambiarías.','Testing honestly is part of the job. If it does not meet it, that is fine: say what you would change.'),
+  pasos:[L('Mira los [[requisito|requisitos]] de tu tarjeta y marca ✔ o ✘.','Look at your card requirements and mark ✔ or ✘.'), L('Mide tu móvil y la [[ranura]] de tu soporte.','Measure your phone and the slot of your stand.'), L('Escribe la conclusión.','Write the conclusion.'), L('Elige a qué cliente le vendría mejor.','Choose which client it suits best.')],
+  ej:{t:L('Ejemplo resuelto: Antonio (tarjeta 0)','Worked example: Antonio (card 0)'), b:L('Móvil con funda: <b>9 mm</b>. Ranura del soporte: <b>8 mm</b>. 8 − 9 = −1 → <b>no cabe</b>. La ranura debería medir 9 + 2 = <b>11 mm</b>.','Phone with case: 9 mm. Stand slot: 8 mm. 8 − 9 = −1 → it does not fit. The slot should be 9 + 2 = 11 mm.')},
+  help:{t:L('Cómo medir','How to measure'), svg:SVG_MEDIR + SVG_RANURA},
+  fields:[
+   {t:'reqcheck', id:'rq', req:true},
+   {t:'ranura', req:true},
+   {t:'radio', id:'concl', q:L('★ Conclusión','Conclusion'), req:true, opts:[['si',L('✔ Mi soporte le sirve a mi cliente','My stand works for my client')],['no',L('◐ No le sirve del todo','It does not fully work')]]},
+   {t:'frase', id:'conclPq', q:L('Explícalo','Explain it'), req:true,
+    tpl:L('Mi soporte {a} a mi cliente porque {b}.','My stand {a} my client because {b}.'),
+    blanks:{a:[L('le sirve','works for'),L('no le sirve del todo','does not fully work for')], b:[L('el móvil cabe en la ranura','the phone fits in the slot'),L('el móvil no cabe en la ranura','the phone does not fit in the slot'),L('tiene orificio para el cable','it has a cable hole'),L('no tiene orificio para el cable','it has no cable hole'),L('es estable','it is stable')]}},
+   {t:'frase', id:'cambiaria', q:L('Para que le sirviera, cambiaría…','To make it work, I would change…'), showIf:d=>d.concl==='no',
+    tpl:L('Para que le sirviera, cambiaría {a}.','To make it work, I would change {a}.'), blanks:{a:[L('la ranura','the slot'),L('el ángulo','the angle'),L('el ancho','the width'),L('añadir un orificio para el cable','add a cable hole'),L('añadir zona antideslizante','add a non-slip area')]}},
+   {t:'sub', q:L('★ ¿A quién más le serviría?','Who else would it suit?')},
+   {t:'radio', id:'otroCliente', q:L('Mira las tarjetas. ¿A qué cliente le vendría MEJOR tu soporte tal como está?','Look at the cards. Which client would your stand suit BEST as it is?'), req:true, opts:CARDS.map(c=>[String(c.n), `${c.emoji} ${c.n} · ${c.nombre}`])},
+   {t:'frase', id:'otroPq', q:L('¿Por qué?','Why?'), req:true, only:'n', tpl:L('Le vendría mejor porque {a}.','It would suit them better because {a}.'), blanks:{a:[L('usa el móvil en la misma posición','uses the phone in the same position'),L('no necesita cable','does not need a cable'),L('necesita cable y mi soporte tiene orificio','needs a cable and my stand has a hole'),L('su móvil es más fino','their phone is thinner')]}},
+   {t:'sub', q:L('Ampliación (sube nota)','Extra (raises your mark)')},
+   {t:'checks', id:'amplRanura', q:L('He cambiado la ranura en Tinkercad para que quepa el móvil','I changed the slot in Tinkercad so the phone fits'), opts:[['si',L('Sí, lo he hecho','Yes, I did it')]]},
+   {t:'num', id:'amplNueva', q:L('Nueva medida de la ranura','New slot size'), unit:'mm', showIf:d=>(d.amplRanura||[]).includes('si')},
+  ]},
+
+{ id:'mods', icon:'🛠️', tipo:'🖥️', title:L('Mis modificaciones','My modifications'),
+  que:L('Explicas los cambios que hiciste a tu soporte.','You explain the changes you made to your stand.'),
+  para:L('Cada cambio tiene que servir para algo.','Each change must have a purpose.'),
+  pasos:[L('Marca los cambios que hiciste.','Tick the changes you made.'), L('Para cada uno: escribe qué hiciste y para qué sirve.','For each one: write what you did and what it is for.'), L('Pega una captura del soporte modificado.','Paste a screenshot of the modified stand.')],
+  ej:{t:L('Ejemplo','Example'), b:L('«Orificio para el cable de <b>12 mm</b> de [[diámetro]] en la base» → sirve para <b>cargar el móvil mientras se usa</b>.','"12 mm diameter cable hole in the base" → it is for charging the phone while using it.')},
+  fields:[
+   {t:'mods', id:'mods', req:true},
+   {t:'photo', id:'fMod', q:L('📷 Captura de tu soporte modificado (muy recomendable)','Screenshot of your modified stand (highly recommended)')},
+  ]},
+
+{ id:'croquis', icon:'✏️', tipo:'📄', title:L('Mi croquis','My sketch'),
+  que:L('Dibujas tus cambios sobre la hoja de croquis de tu soporte.','You draw your changes on your stand\'s sketch sheet.'),
+  para:L('Un dibujo con [[cota|cotas]] permite que otra persona fabrique tu pieza. La [[perspectiva isométrica]] ayuda a verla en 3D.','A drawing with dimensions lets someone else make your part. The isometric view helps to see it in 3D.'),
+  pasos:[L('Descarga e imprime la hoja de tu soporte a doble cara (o pídela al profe).','Download and print your stand\'s sheet double-sided (or ask the teacher).'), L('Cara 1: alzado, perfil, planta y perspectiva. Cara 2: pasos y ejemplos.','Page 1: front, side, top and isometric views. Page 2: steps and examples.'), L('Retinta con LÁPIZ lo que no cambias.','Go over what you do not change with PENCIL.'), L('Dibuja en ROJO lo que añades o quitas, en las vistas donde se vea.','Draw what you add or remove in RED, in the views where it shows.'), L('Pon ①, ② junto a cada cambio y su cota. Las vistas están a tamaño real (1:1): mide con la regla.','Put ①, ② next to each change and its dimension. The views are real size (1:1): measure with a ruler.'), L('Ampliación: dibuja también tu cambio en la perspectiva isométrica.','Extra: also draw your change in the isometric view.'), L('Escribe aquí qué es cada número.','Write here what each number is.')],
+  pasosR:[L('Imprime la hoja de tu soporte (o pídela al profe).','Print your stand\'s sheet (or ask the teacher).'), L('Repasa con lápiz lo gris.','Go over the grey with pencil.'), L('Dibuja tu cambio en rojo en la vista donde mejor se vea.','Draw your change in red in the view where it shows best.'), L('Pon ① y la medida real en mm.','Write ① and the real size in mm.'), L('En la perspectiva: una flecha y ① donde va tu cambio.','In the isometric view: an arrow and ① where your change goes.')],
+  ej:{t:L('Ejemplo','Example'), b:L('Dibujas un hueco y la regla marca <b>30 mm</b> en el papel → la cota es <b>30</b> (las vistas están a tamaño real). Leyenda: ① hueco para ahorrar material, 30 × 20.','You draw a window and the ruler shows 30 mm → the dimension is 30 (views are real size). Key: ① window to save material, 30 × 20.')},
+  fields:[
+   {t:'download'},
+   {t:'text', id:'ley1', q:L('① es…','① is…'), req:true},
+   {t:'text', id:'ley2', q:L('② es…','② is…')},
+   {t:'text', id:'ley3', q:L('③ es…','③ is…'), only:'n'},
+   {t:'checks', id:'cqCheck', q:L('Compruebo mi croquis','I check my sketch'), req:true, min:3, opts:[['retinta',L('He retintado con lápiz lo que no cambia','I went over what does not change with pencil')],['color',L('Mis cambios están en color','My changes are in colour')],['numcota',L('Cada cambio tiene número y cota','Each change has a number and a dimension')],['vistas',L('Cada cambio está en todas las vistas donde se ve','Each change is in all the views where it shows')],['real',L('Las cotas son medidas reales (mido con la regla)','Dimensions are real sizes (I measure with a ruler)')]]},
+   {t:'checks', id:'cqIso', q:L('Ampliación (sube nota): perspectiva isométrica','Extra (raises your mark): isometric view'), only:'n', opts:[['iso',L('Mi cambio está dibujado también en la perspectiva','My change is also drawn in the isometric view')]]},
+   {t:'checks', id:'cqIsoR', q:L('La perspectiva','The isometric view'), only:'r', req:true, opts:[['flecha',L('He puesto una flecha y el número donde va mi cambio','I drew an arrow and the number where my change goes')]]},
+   {t:'photo', id:'fCroquis', q:L('📷 Foto de tu hoja de croquis','Photo of your sketch sheet')},
+  ]},
+
+{ id:'compr', icon:'✅', tipo:'🖥️', title:L('Comprobación antes de entregar','Check before handing in'),
+  que:L('Revisas que tu pieza se puede imprimir.','You check your part can be printed.'),
+  para:L('Si la pieza no cumple, la impresora fallará o gastará plástico de más.','If the part does not comply, the printer will fail or waste plastic.'),
+  pasos:[L('Mira tu soporte en Tinkercad.','Look at your stand in Tinkercad.'), L('Escribe sus medidas (largo, ancho y alto).','Write its size (length, width, height).'), L('Marca cada comprobación.','Tick each check.')],
+  fields:[
+   {t:'num', id:'mL', q:L('Largo','Length'), unit:'mm', req:true},
+   {t:'num', id:'mA', q:L('Ancho','Width'), unit:'mm', req:true},
+   {t:'num', id:'mH', q:L('Alto','Height'), unit:'mm', req:true},
+   {t:'calc', html:d=>{ const ok=[['mL',LIMITS.L],['mA',LIMITS.A],['mH',LIMITS.H]].every(([k,m])=>+d[k]>0 && +d[k]<=m);
+      if(!(+d.mL&&+d.mA&&+d.mH)) return bi(L('Escribe las tres medidas.','Write the three sizes.'));
+      return ok ? `<span class="ok">✔ ${bi(L(`Cabe en ${LIMITS.L} × ${LIMITS.A} × ${LIMITS.H} mm`,`It fits in ${LIMITS.L} × ${LIMITS.A} × ${LIMITS.H} mm`),true)}</span>` : `<span class="bad">✘ ${bi(L(`No cabe en ${LIMITS.L} × ${LIMITS.A} × ${LIMITS.H} mm. Hay que hacerlo más pequeño.`,`It does not fit. Make it smaller.`),true)}</span>`; }},
+   {t:'checks', id:'chk', q:L('Comprobaciones','Checks'), req:true, min:4, opts:[['grupo',L('Todo está [[agrupar|agrupado]] en una sola pieza','Everything is grouped into one part')],['suelo',L('La pieza está en el suelo (tecla D)','The part sits on the floor (key D)')],['nofinos',L('No hay partes muy finas (menos de 2 mm)','No very thin parts (under 2 mm)')],['nosop',L('Se puede imprimir sin [[soportes de impresión]]','It can print without supports')],['stl',L('He descargado el archivo [[STL]]','I downloaded the STL file')]]},
+   {t:'frase', id:'cumple', q:L('Termina la frase','Finish the sentence'), req:true, only:'n', tpl:L('Mi soporte {a} los condicionantes porque {b}.','My stand {a} the constraints because {b}.'), blanks:{a:[L('cumple','meets'),L('no cumple','does not meet')], b:[L('cabe en la impresora','it fits in the printer'),L('es una sola pieza','it is one part'),L('no necesita soportes','it needs no supports'),L('es demasiado grande','it is too big')]}},
+  ]},
+
+{ id:'laminado', icon:'🖨️', tipo:'🖥️', title:L('Laminado','Slicing'),
+  que:L('Copias los datos del [[laminador]] de la práctica.','You copy the slicer data from the practice.'),
+  para:L('Para saber cuánto tarda, cuánto plástico gasta y cuánto cuesta.','To know how long it takes, how much plastic it uses and what it costs.'),
+  pasos:[L('Mira el laminador (en tu ordenador o en el proyector).','Look at the slicer (on your computer or the projector).'), L('Copia el tiempo y los gramos.','Copy the time and grams.'), L('La app calcula el coste.','The app calculates the cost.')],
+  ej:{t:L('Ejemplo','Example'), b:L('35 g × 0,015 € = <b>0,53 €</b> de plástico. Tiempo: 1 h 20 min → <b>cumple</b> (menos de 2 h).','35 g × €0.015 = €0.53 of plastic. Time: 1 h 20 min → OK (under 2 h).')},
+  fields:[
+   {t:'radio', id:'impresora', q:L('Impresora','Printer'), opts:[['sermoon','Creality Sermoon'],['a1','Bambu Lab A1 mini'],['otra',L('Otra','Other')]]},
+   {t:'radio', id:'laminador', q:L('[[laminador|Laminador]]','Slicer'), opts:[['creality','Creality Print'],['bambu','Bambu Studio'],['kiri','Kiri:Moto'],['otro',L('Otro','Other')]]},
+   {t:'num', id:'tH', q:L('Tiempo de impresión: horas','Printing time: hours'), unit:'h', req:true},
+   {t:'num', id:'tM', q:L('Tiempo de impresión: minutos','Printing time: minutes'), unit:'min', req:true},
+   {t:'num', id:'gramos', q:L('Plástico ([[PLA]])','Plastic (PLA)'), unit:'g', req:true},
+   {t:'calc', html:d=>{ const g=+String(d.gramos||'').replace(',','.'); const h=(+d.tH||0)+(+d.tM||0)/60; let s='';
+      if(g>0) s+=`💶 ${bi(L(`Coste del plástico: ${fmtEur(g*PLA_EUR_G)}`,`Plastic cost: ${fmtEur(g*PLA_EUR_G)}`),true)}<br>`;
+      if(d.tH!==undefined && d.tH!=='' || d.tM) s+= h<=LIMITS.horas ? `<span class="ok">⏱️ ✔ ${bi(L('Tarda 2 h o menos: cumple','2 h or less: OK'),true)}</span>` : `<span class="bad">⏱️ ✘ ${bi(L('Tarda más de 2 h: hay que reducir','Over 2 h: reduce it'),true)}</span>`;
+      return s || bi(L('Escribe el tiempo y los gramos.','Write the time and grams.')); }},
+   {t:'num', id:'relleno', q:L('[[relleno|Relleno]]','Infill'), unit:'%', only:'n'},
+   {t:'num', id:'capa', q:L('[[altura de capa|Altura de capa]]','Layer height'), unit:'mm', only:'n'},
+   {t:'radio', id:'orient', q:L('Posición en la impresora','Position on the printer'), opts:[['pie',L('De pie','Standing')],['tumbado',L('Tumbado (de lado)','Lying (on its side)')]]},
+   {t:'radio', id:'sopImp', q:L('¿Necesita [[soportes de impresión]]?','Does it need print supports?'), opts:[['no',L('No','No')],['si',L('Sí','Yes')]]},
+  ]},
+
+{ id:'fabr', icon:'🏭', tipo:'📄', title:L('Fabricación','Manufacturing'),
+  que:L('Apuntas en qué punto está tu pieza.','You note where your part is.'),
+  para:L('No todas las piezas se imprimen a la vez. El profe aprueba cada una.','Not all parts print at once. The teacher approves each one.'),
+  pasos:[L('Marca el estado de tu pieza.','Mark the state of your part.'), L('Si ya está impresa: pruébala con tu móvil y haz una foto.','If it is printed: test it with your phone and take a photo.')],
+  fields:[
+   {t:'radio', id:'estadoPieza', q:L('Estado de mi pieza','State of my part'), req:true, opts:[['entregada',L('📤 Entregada al profe','Handed to the teacher')],['aprobada',L('👍 Aprobada, esperando impresora','Approved, waiting for the printer')],['cambiar',L('✏️ El profe me pide cambios','The teacher asks for changes')],['impresa',L('✅ Impresa','Printed')]]},
+   {t:'text', id:'cambiosProfe', q:L('¿Qué cambios te pide el profe?','What changes does the teacher ask for?'), showIf:d=>d.estadoPieza==='cambiar'},
+   {t:'radio', id:'pruebaFinal', q:L('Con el móvil puesto, la ranura…','With the phone on, the slot…'), showIf:d=>d.estadoPieza==='impresa', opts:[['bien',L('✔ cabe bien','fits well')],['justo',L('◐ queda justa','is tight')],['nocabe',L('✘ no cabe','does not fit')],['suelto',L('↔ queda suelta','is loose')]]},
+   {t:'photo', id:'fPieza', q:L('📷 Foto de la pieza impresa (sin caras)','Photo of the printed part (no faces)'), showIf:d=>d.estadoPieza==='impresa'},
+   {t:'html', html:()=>`<p class="note">${bi(L('Mientras esperas la impresora, el profe puede proponerte un llavero u otra pieza pequeña.','While you wait for the printer, the teacher may suggest a keyring or another small part.'))}</p>`},
+  ]},
+
+{ id:'present', icon:'🎬', tipo:'🖥️', title:L('Presentación: ¡véndelo!','Presentation: sell it!'),
+  que:L('Preparas un anuncio o una presentación de tu soporte.','You prepare an ad or a presentation of your stand.'),
+  para:L('Un buen producto hay que saber contarlo.','A good product must be well explained.'),
+  pasos:[L('Elige el formato.','Choose the format.'), L('Rellena el guion de 4 partes.','Fill in the 4-part script.'), L('Pon un precio.','Set a price.'), L('Repasa la lista antes de presentar.','Check the list before presenting.')],
+  ej:{t:L('Normas','Rules'), b:L('En el vídeo o las fotos sale <b>solo el soporte</b>, nunca caras. Se ve <b>solo en clase</b>: no se sube a redes sociales.','Only the stand appears, never faces. It is shown only in class: not uploaded to social media.')},
+  fields:[
+   {t:'radio', id:'formato', q:L('Formato','Format'), req:true, only:'n', opts:[['anuncio',L('📱 Anuncio vertical tipo TikTok, 30–45 s','Vertical ad (TikTok style), 30–45 s')],['diapos',L('🖼️ 3–4 diapositivas, 2 min','3–4 slides, 2 min')]]},
+   {t:'html', only:'r', html:()=>`<div class="calc">${bi(L('Tu presentación: <b>3 fotos + 3 frases</b>. Se las cuentas al profe en voz alta o las grabas en audio.','Your presentation: 3 photos + 3 sentences. Tell them to the teacher aloud or record audio.'))}</div>`},
+   {t:'html', html:d=>{ const c=card(d.otroCliente ?? d.tarjeta); return c?`<div class="calc">🎯 ${bi(L(`Se lo vendes a: <b>${c.emoji} ${c.nombre}</b> (${c.rol.es})`,`You sell it to: ${c.nombre} (${c.rol.en})`),true)}</div>`:''; }},
+   {t:'guion', id:'guion', req:true, only:'n'},
+   {t:'frase', id:'rf1', q:L('Frase 1','Sentence 1'), req:true, only:'r', tpl:L('Este soporte es para {a}.','This stand is for {a}.'), blanks:{a:CARDS.map(c=>L(c.nombre,c.nombre))}},
+   {t:'frase', id:'rf2', q:L('Frase 2','Sentence 2'), req:true, only:'r', tpl:L('Sirve para {a}.','It is for {a}.'), blanks:{a:[L('ver vídeos sin sujetar el móvil','watching videos hands-free'),L('hacer videollamadas','video calls'),L('cargar el móvil mientras lo usa','charging while in use'),L('ver recetas al cocinar','reading recipes while cooking')]}},
+   {t:'frase', id:'rf3', q:L('Frase 3','Sentence 3'), req:true, only:'r', tpl:L('Lo hice con {a}.','I made it with {a}.'), blanks:{a:[L('Tinkercad y la impresora 3D','Tinkercad and the 3D printer'),L('Tinkercad','Tinkercad')]}},
+   {t:'num', id:'precio', q:L('¿Por cuánto lo venderías?','What price would you sell it for?'), unit:'€', req:true},
+   {t:'calc', html:d=>{ const g=+String(d.gramos||'').replace(',','.'); return g>0?bi(L(`El plástico cuesta ${fmtEur(g*PLA_EUR_G)} (página de laminado).`,`The plastic costs ${fmtEur(g*PLA_EUR_G)} (slicing page).`)):bi(L('Rellena los gramos en la página de laminado para ver el coste.','Fill in the grams on the slicing page to see the cost.')); }},
+   {t:'frase', id:'precioPq', q:L('¿Por qué ese precio?','Why that price?'), only:'n', tpl:L('Ese precio porque {a}.','That price because {a}.'), blanks:{a:[L('hay que pagar el plástico y la luz','plastic and electricity must be paid'),L('es un diseño a medida','it is a custom design'),L('es barato de fabricar','it is cheap to make')]}},
+   {t:'checks', id:'antesPres', q:L('Antes de presentar','Before presenting'), only:'n', opts:[['claro',L('Hablo claro y sin prisa','I speak clearly and calmly')],['tiempo',L('No me paso de tiempo','I keep to the time')],['tecnicas',L('Uso 2 palabras técnicas (ranura, cota, STL, laminador, PLA…)','I use 2 technical words')],['inclusivo',L('Uso un lenguaje inclusivo, sin estereotipos','I use inclusive language')]]},
+   {t:'photo', id:'fPres', q:L('📷 Foto o captura de tu anuncio o diapositiva (opcional)','Photo or screenshot of your ad or slide (optional)')},
+  ]},
+
+{ id:'proceso', icon:'🧭', tipo:'📄', title:L('Mi proyecto en el proceso tecnológico','My project in the technological process'),
+  que:L('Colocas cada cosa que hiciste en su fase.','You place each thing you did in its phase.'),
+  para:L('Así ves que has seguido el [[proceso tecnológico]] como en una empresa.','So you see you followed the technological process like a company.'),
+  pasos:[L('Lee cada actividad.','Read each activity.'), L('Elige su fase.','Choose its phase.'), L('Pulsa «Comprobar».','Press "Check".'), L('Rellena la autoevaluación.','Fill in the self-assessment.')],
+  fields:[
+   {t:'fases', id:'fases', req:true},
+   {t:'sub', q:L('Autoevaluación','Self-assessment')},
+   {t:'carita', id:'ae', req:true, rows:[['cliente',L('Entender el problema del cliente','Understanding the client\'s problem')],['su',L('SketchUp y leer planos','SketchUp and reading drawings')],['tk',L('Tinkercad','Tinkercad')],['croquis',L('El croquis con cotas','The sketch with dimensions')],['comprobar',L('Comprobar si le sirve al cliente','Checking if it works for the client')],['present',L('Presentar mi soporte','Presenting my stand')]]},
+   {t:'frase', id:'mejor', q:L('Lo que mejor he hecho','What I did best'), tpl:L('Lo que mejor he hecho es {a}.','What I did best is {a}.'), blanks:{a:[L('SketchUp','SketchUp'),L('Tinkercad','Tinkercad'),L('el croquis','the sketch'),L('la presentación','the presentation')]}},
+   {t:'frase', id:'mejorar', q:L('Lo que quiero mejorar','What I want to improve'), tpl:L('Quiero mejorar {a}.','I want to improve {a}.'), blanks:{a:[L('medir y poner cotas','measuring and dimensions'),L('leer las vistas','reading views'),L('trabajar en equipo','teamwork'),L('terminar a tiempo','finishing on time')]}},
+  ]},
+
+{ id:'entregar', icon:'📤', tipo:'🖥️', title:L('Entregar','Hand in'),
+  que:L('Sacas el PDF y lo entregas en Classroom.','You make the PDF and hand it in on Classroom.'),
+  para:L('El profe necesita tu memoria para evaluarte.','The teacher needs your report to assess you.'),
+  pasos:[L('Mira la lista: ¿te falta algo ★?','Check the list: is any ★ missing?'), L('Pulsa «Sacar PDF» → Destino: «Guardar como PDF» → Guardar.','Press "Make PDF" → Destination: "Save as PDF" → Save.'), L('Sube el PDF a la tarea de Classroom.','Upload the PDF to the Classroom task.'), L('Pega también tu código en la tarea (comentario privado).','Also paste your code in the task (private comment).')],
+  fields:[{t:'entrega'}]},
+];
+
+/* ---------- utilidades varias ---------- */
+PAGES.forEach(p=>p.fields.forEach((f,i)=>{ f._k=p.id+'_'+i; }));
+function fmtEur(x){ return (Math.round(x*100)/100).toLocaleString('es-ES',{minimumFractionDigits:2, maximumFractionDigits:2})+' €'; }
+function vis(f, d){ if(f.only && f.only!==S.mode) return false; if(f.showIf && !f.showIf(d)) return false; return true; }
+function pagesForMode(){ return PAGES; }
+function idsOfPage(p){ return p.fields.filter(f=>f.id).map(f=>f.id); }
+
+/* ---------- ¿campo relleno? ---------- */
+function filled(f, d){
+  switch(f.t){
+    case 'text': case 'area': case 'num': case 'radio': case 'probpick': return d[f.id]!==undefined && String(d[f.id]).trim()!=='';
+    case 'checks': return Array.isArray(d[f.id]) && d[f.id].length >= (f.min||1);
+    case 'table': { const o=d[f.id]||{}; return (f.reqRows||f.rows.map(r=>r[0])).every(r=>o[r]); }
+    case 'frase': return Object.keys(f.blanks).every(k=>String(d[f.id+'.'+k]||'').trim()!=='');
+    case 'reqcheck': { const c=card(d.tarjeta); if(!c) return false; const o=d.rq||{}; return ['pos','cable','extra'].every(k=>o[k]); }
+    case 'ranura': return +d.grosor>0 && +d.ranuraMed>0 && !!d.ranuraRes;
+    case 'mods': { const m=d.modsSel||[]; if(!m.length) return false; return m.every(k=>(String(d['modTxt_'+k]||'').trim()!=='') && d['modPara_'+k]); }
+    case 'guion': return [1,2,3,4].every(i=>String(d['g'+i+'b']||'').trim()!=='');
+    case 'fases': { const items=fasesItems(); return items.every(it=>d['fa_'+it.k]); }
+    case 'carita': return f.rows.every(r=>d[f.id+'_'+r[0]]);
+    default: return true;
+  }
+}
+function reqLabel(f){
+  switch(f.t){
+    case 'reqcheck': return L('Requisitos de la tarjeta (✔/✘)','Card requirements');
+    case 'ranura': return L('La ranura: medidas y resultado','The slot: sizes and result');
+    case 'mods': return L('Al menos una modificación con qué hiciste y para qué','At least one change: what and what for');
+    case 'guion': return L('Las 4 partes del guion','The 4 script parts');
+    case 'fases': return L('Elegir la fase de cada actividad','Choose the phase of each activity');
+    case 'carita': return L('Autoevaluación','Self-assessment');
+    default: return f.q || L('Campo','Field');
+  }
+}
+function missing(p, d){ return p.fields.filter(f=>f.req && vis(f,d) && !filled(f,d)); }
+function pageDone(p, d){ return missing(p,d).length===0; }
+
+/* ---------- almacenamiento ---------- */
+function persist(){
+  try{ localStorage.setItem(APP+':data', JSON.stringify(S.data)); localStorage.setItem(APP+':lang', S.lang); }catch(e){}
+  S.dirty = true;
+}
+function restore(){
+  try{ const d = JSON.parse(localStorage.getItem(APP+':data')||'{}'); if(d && typeof d==='object') S.data = d; }catch(e){}
+  try{ const l = localStorage.getItem(APP+':lang'); if(l) S.lang=l; }catch(e){}
+  try{ S.lastCode = +localStorage.getItem(APP+':lastcode')||0; }catch(e){}
+}
+/* IndexedDB para fotos */
+let dbp=null;
+function db(){ if(dbp) return dbp; dbp = new Promise((res,rej)=>{ try{ const r=indexedDB.open(APP,1); r.onupgradeneeded=()=>r.result.createObjectStore('fotos'); r.onsuccess=()=>res(r.result); r.onerror=()=>rej(r.error);}catch(e){rej(e);} }); return dbp; }
+async function idbAll(){ try{ const d=await db(); return await new Promise((res)=>{ const out={}; const tx=d.transaction('fotos'); const st=tx.objectStore('fotos'); const rq=st.openCursor(); rq.onsuccess=()=>{ const c=rq.result; if(c){ out[c.key]=c.value; c.continue(); } else res(out); }; rq.onerror=()=>res(out); }); }catch(e){ return {}; } }
+async function idbPut(k,v){ try{ const d=await db(); await new Promise((res)=>{ const tx=d.transaction('fotos','readwrite'); tx.objectStore('fotos').put(v,k); tx.oncomplete=res; tx.onerror=res; }); }catch(e){} }
+async function idbDel(k){ try{ const d=await db(); await new Promise((res)=>{ const tx=d.transaction('fotos','readwrite'); tx.objectStore('fotos').delete(k); tx.oncomplete=res; tx.onerror=res; }); }catch(e){} }
+async function idbClear(){ try{ const d=await db(); await new Promise((res)=>{ const tx=d.transaction('fotos','readwrite'); tx.objectStore('fotos').clear(); tx.oncomplete=res; tx.onerror=res; }); }catch(e){} }
+
+/* ---------- código de guardado ---------- */
+function b64u(bytes){ let s=''; const ch=0x8000; for(let i=0;i<bytes.length;i+=ch) s+=String.fromCharCode.apply(null, bytes.subarray(i,i+ch)); return btoa(s).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,''); }
+function unb64u(s){ s=s.replace(/-/g,'+').replace(/_/g,'/'); while(s.length%4) s+='='; const b=atob(s); const u=new Uint8Array(b.length); for(let i=0;i<b.length;i++) u[i]=b.charCodeAt(i); return u; }
+function sum(str){ let h=0; for(let i=0;i<str.length;i++){ h=(h*31 + str.charCodeAt(i))>>>0; } return (h%1296).toString(36).padStart(2,'0').toUpperCase(); }
+async function pipe(bytes, Stream, fmt){ const s=new Blob([bytes]).stream().pipeThrough(new Stream(fmt)); return new Uint8Array(await new Response(s).arrayBuffer()); }
+async function makeCode(data){
+  const json = JSON.stringify({v:VERSION, m:S.mode, d:data});
+  const raw = new TextEncoder().encode(json);
+  let body, pre;
+  if(typeof CompressionStream!=='undefined'){ body=b64u(await pipe(raw, CompressionStream, 'deflate-raw')); pre='SDA1Z'; }
+  else { body=b64u(raw); pre='SDA1J'; }
+  return `${pre}-${body}-${sum(body)}`;
+}
+async function readCode(code){
+  code = String(code||'').replace(/\s+/g,'');
+  const m = code.match(/^(SDA1[ZJ])-([A-Za-z0-9_-]+)-([0-9A-Z]{2})$/);
+  if(!m) throw new Error('formato');
+  if(sum(m[2])!==m[3]) throw new Error('incompleto');
+  let bytes = unb64u(m[2]);
+  if(m[1]==='SDA1Z'){ if(typeof DecompressionStream==='undefined') throw new Error('navegador'); bytes = await pipe(bytes, DecompressionStream, 'deflate-raw'); }
+  const obj = JSON.parse(new TextDecoder().decode(bytes));
+  if(!obj || typeof obj.d!=='object') throw new Error('datos');
+  return obj;
+}
+
+/* ---------- fotos: compresión ---------- */
+function loadImg(src){ return new Promise((res,rej)=>{ const i=new Image(); i.onload=()=>res(i); i.onerror=rej; i.src=src; }); }
+async function compress(blob){
+  const url = URL.createObjectURL(blob);
+  try{
+    const img = await loadImg(url);
+    const max = 1100; let w=img.naturalWidth, h=img.naturalHeight; const k=Math.min(1, max/Math.max(w,h)); w=Math.round(w*k); h=Math.round(h*k);
+    const c=document.createElement('canvas'); c.width=w; c.height=h; const g=c.getContext('2d'); g.fillStyle='#fff'; g.fillRect(0,0,w,h); g.drawImage(img,0,0,w,h);
+    return c.toDataURL('image/jpeg', 0.72);
+  } finally { URL.revokeObjectURL(url); }
+}
+async function setPhoto(id, blob){
+  if(!blob || !/^image\//.test(blob.type)){ toast(L('Eso no es una imagen.','That is not an image.')); return; }
+  const du = await compress(blob);
+  S.photos[id]=du; await idbPut(id, du); S.data['_f_'+id]=1; persist(); renderPage(); toast(L('📷 Imagen añadida','Image added'));
+}
+async function delPhoto(id){ delete S.photos[id]; await idbDel(id); delete S.data['_f_'+id]; persist(); renderPage(); }
+
+/* ---------- render: campos ---------- */
+function noStar(q){ return (q && typeof q==='object' && /^★/.test(q.es)) ? {es:q.es.replace(/^★\s*/,''), en:q.en} : q; }
+function qhtml(f, star){
+  const st = (star && f.req) ? '<span class="star" title="Mínimo obligatorio">★</span> ' : '';
+  const q = f.q ? bi(f.req ? noStar(f.q) : f.q) : '';
+  const sayBtn = f.q ? `<button type="button" class="say" data-say="${esc(sayText(f.q))}" aria-label="Escuchar">🔊</button>` : '';
+  return f.q ? `<div class="q"><div class="txt">${st}${q}</div>${sayBtn}</div>` : '';
+}
+function optHTML(name, val, label, checked, type){
+  return `<label class="opt"><input type="${type||'radio'}" name="${esc(name)}" value="${esc(val)}" ${checked?'checked':''}> <span>${typeof label==='string'?esc(label):bi(label,true)}</span></label>`;
+}
+function bankHTML(target, words){
+  return `<div class="bank">${words.map(w=>`<button type="button" class="chip" data-bank="${esc(target)}" data-word="${esc(tx(w))}">${typeof w==='string'?esc(w):(S.lang==='en'?esc(w.en||w.es):esc(w.es))}</button>`).join('')}</div>`;
+}
+function fieldHTML(f, d){
+  const v = d[f.id];
+  switch(f.t){
+    case 'sub': return `<div class="sub">${bi(f.q)}</div>`;
+    case 'html': return `<div class="f">${f.html(d)}</div>`;
+    case 'text': return `<div class="f">${qhtml(f,1)}<input type="text" data-id="${f.id}" value="${esc(v)}" autocomplete="off"></div>`;
+    case 'area': return `<div class="f">${qhtml(f,1)}<textarea data-id="${f.id}" rows="${f.rows||3}">${esc(v)}</textarea>${f.bank?bankHTML(f.id,f.bank):''}</div>`;
+    case 'num': return `<div class="f">${qhtml(f,1)}<input type="number" inputmode="decimal" step="any" min="0" data-id="${f.id}" value="${esc(v)}"><span class="unit">${esc(f.unit||'')}</span></div>`;
+    case 'radio': {
+      let fb='';
+      if(f.check && v){ fb = v===f.check ? `<div class="ok">✔ ${bi(L('¡Correcto!','Correct!'),true)}</div>` : `<div class="bad">✘ ${bi(L('Revísalo. Pista: mira la ayuda.','Check it again. Hint: see the help.'),true)}</div>`; }
+      return `<div class="f">${qhtml(f,1)}<div class="opts">${f.opts.map(o=>optHTML(f.id,o[0],o[1],v===o[0])).join('')}</div>${fb}</div>`;
+    }
+    case 'checks': { const a=Array.isArray(v)?v:[]; return `<div class="f">${qhtml(f,1)}${f.min>1?`<div class="note">${bi(L(`Marca al menos ${f.min}.`,`Tick at least ${f.min}.`),true)}</div>`:''}<div class="opts">${f.opts.map(o=>optHTML(f.id,o[0],o[1],a.includes(o[0]),'checkbox')).join('')}</div></div>`; }
+    case 'table': { const o=v||{}; return `<div class="f">${qhtml(f,1)}<div class="tscroll"><table class="t"><thead><tr><th></th>${f.cols.map(c=>`<th class="c">${bi(c[1])}</th>`).join('')}</tr></thead><tbody>${f.rows.map(r=>`<tr><td>${bi(r[1],true)}</td>${f.cols.map(c=>`<td class="c"><input type="radio" aria-label="${esc(tx(r[1]))}: ${esc(tx(c[1]))}" name="${f.id}__${r[0]}" value="${c[0]}" ${o[r[0]]===c[0]?'checked':''}></td>`).join('')}</tr>`).join('')}</tbody></table></div></div>`; }
+    case 'frase': {
+      const t = tx(f.tpl, S.lang==='en'?'en':'es');
+      const parts = t.split(/(\{[a-z]\})/);
+      const html = parts.map(p=>{ const m=p.match(/^\{([a-z])\}$/); if(!m) return esc(p); const k=m[1]; const id=f.id+'.'+k; return `<input type="text" data-id="${id}" value="${esc(d[id])}" aria-label="hueco ${k}" autocomplete="off">`; }).join('');
+      const en = (S.lang==='both' && f.tpl.en) ? `<div class="en">${esc(f.tpl.en.replace(/\{[a-z]\}/g,'___'))}</div>` : '';
+      const banks = Object.entries(f.blanks).map(([k,w])=>`<div class="note" style="margin-top:6px">${bi(L(`Ideas para el hueco ${Object.keys(f.blanks).length>1?k.toUpperCase():''}:`,'Ideas:'),true)}</div>${bankHTML(f.id+'.'+k, w)}`).join('');
+      return `<div class="f">${qhtml(f,1)}<div class="frase">${html}</div>${en}${banks}</div>`;
+    }
+    case 'photo': return `<div class="f">${qhtml(f,0)}${photoSlot(f.id)}</div>`;
+    case 'calc': return `<div class="f"><div class="calc" data-calc="${f._k}">${f.html(d)}</div></div>`;
+    case 'card': return `<div class="f">${cardHTML(card(d[f.key]))}</div>`;
+    case 'probpick': {
+      const c=card(d.tarjeta); if(!c) return `<div class="f">${qhtml(f,1)}<p class="note">${bi(L('Primero elige tu tarjeta.','First choose your card.'))}</p></div>`;
+      const others = CARDS.filter(x=>x.n!==c.n); const a=others[(c.n+3)%others.length], b=others[(c.n+5)%others.length];
+      const opts=[[String(c.n),c.prob],[String(a.n),a.prob],[String(b.n),b.prob]].sort((x,y)=>((+x[0]*7)%5)-((+y[0]*7)%5));
+      let fb=''; if(v){ fb = v===String(c.n)?`<div class="ok">✔ ${bi(L('¡Correcto! Ese es el problema de tu cliente.','Correct! That is your client\'s problem.'),true)}</div>`:`<div class="bad">✘ ${bi(L('Esa frase es de otra tarjeta. Lee otra vez la frase subrayada.','That sentence is from another card. Read the underlined sentence again.'),true)}</div>`; }
+      return `<div class="f">${qhtml(f,1)}<div class="opts">${opts.map(o=>`<label class="opt wide"><input type="radio" name="${f.id}" value="${o[0]}" ${v===o[0]?'checked':''}> <span>${bi(o[1],true)}</span></label>`).join('')}</div>${fb}</div>`;
+    }
+    case 'reqcheck': return reqcheckHTML(f, d);
+    case 'ranura': return ranuraHTML(f, d);
+    case 'mods': return modsHTML(f, d);
+    case 'matrix': return matrixHTML(f, d);
+    case 'guion': return guionHTML(f, d);
+    case 'fases': return fasesHTML(f, d);
+    case 'carita': return caritaHTML(f, d);
+    case 'download': return downloadHTML(d);
+    case 'entrega': return entregaHTML(d);
+  }
+  return '';
+}
+function cardHTML(c){
+  if(!c) return `<p class="note">${bi(L('Elige el número de tu tarjeta y aquí aparecerá.','Choose your card number and it will appear here.'))}</p>`;
+  return `<div class="cardv"><div class="big">${c.emoji} ${esc(c.nombre)} <button type="button" class="say" data-say="${esc(c.nombre+'. '+sayText(c.rol)+'. '+sayText(c.prob)+'. '+sayText(c.extra))}" aria-label="Escuchar la tarjeta">🔊</button></div><div>${bi(c.rol)}</div>
+   <div class="prob">${bi(c.prob)}</div>
+   <table class="t"><tr><th>${bi(L('Cómo usa el móvil','How the phone is used'),true)}</th><td>${bi(USO[c.uso],true)}</td></tr>
+   <tr><th>${bi(L('Posición de la persona','Person\'s position'),true)}</th><td>${bi(c.pos,true)}</td></tr>
+   <tr><th>${bi(L('¿Carga mientras lo usa?','Charging while in use?'),true)}</th><td>${c.cable?bi(L('🔌 Sí','Yes'),true):bi(L('No','No'),true)}</td></tr>
+   <tr><th>⚠️ ${bi(L('Además…','Also…'),true)}</th><td>${bi(c.extra,true)}</td></tr></table></div>`;
+}
+function reqcheckHTML(f, d){
+  const c=card(d.tarjeta);
+  if(!c) return `<div class="f">${qhtml({q:L('Requisitos de mi tarjeta','My card requirements'),req:true},1)}<p class="bad">${bi(L('Primero elige tu tarjeta en la página «Mi cliente».','First choose your card on the "My client" page.'))}</p></div>`;
+  const o=d.rq||{};
+  const rows=[
+    ['pos', L(`El móvil va en ${c.uso==='V'?'vertical':'horizontal'}. ¿Mi soporte lo permite?`,`The phone goes ${c.uso==='V'?'portrait':'landscape'}. Does my stand allow it?`)],
+    ['cable', c.cable?L('Carga mientras lo usa. ¿Mi soporte tiene [[orificio]] para el cable?','Charges while in use. Does my stand have a cable hole?'):L('No necesita cable.','No cable needed.')],
+    ['extra', L(`Además: ${c.extra.es} ¿Mi soporte lo resuelve?`,`Also: ${c.extra.en} Does my stand solve it?`)],
+  ];
+  const cols = k => (k==='cable' && !c.cable) ? [['na',L('— No hace falta','Not needed')]] : [['si','✔'],['no','✘']];
+  return `<div class="f">${qhtml({q:L(`Requisitos de mi tarjeta (${c.emoji} ${c.nombre})`,`My card requirements`),req:true},1)}
+   <table class="t">${rows.map(([k,lab])=>`<tr><td>${bi(lab)}</td><td style="white-space:nowrap">${cols(k).map(cc=>`<label class="opt" style="display:inline-flex;margin:2px"><input type="radio" name="rq__${k}" value="${cc[0]}" ${o[k]===cc[0]?'checked':''}> ${typeof cc[1]==='string'?cc[1]:bi(cc[1],true)}</label>`).join('')}</td></tr>`).join('')}</table></div>`;
+}
+function ranuraCalc(d){
+  const g=+String(d.grosor||'').replace(',','.'), r=+String(d.ranuraMed||'').replace(',','.');
+  let res='';
+  if(g>0 && r>0){ const dif=Math.round((r-g)*10)/10; let k,cls; if(dif<0){k=L('no cabe','does not fit');cls='bad';} else if(dif<=1){k=L('queda justo','is tight');cls='bad';} else if(dif<=4){k=L('cabe bien','fits well');cls='ok';} else {k=L('queda suelto','is loose');cls='bad';}
+    res=`<div class="calc">${bi(L(`Ranura − móvil = ${r} − ${g} = <b>${dif} mm</b> → <span class="${cls}">${k.es}</span>`,`Slot − phone = ${dif} mm → ${k.en}`))}<br>${bi(L(`La ranura ideal para tu móvil: ${g} + 2 = <b>${Math.round((g+2)*10)/10} mm</b>`,`Ideal slot for your phone: ${Math.round((g+2)*10)/10} mm`))}</div>`; }
+  return res;
+}
+function ranuraHTML(f, d){
+  const res = `<div data-calc="ranura">${ranuraCalc(d)}</div>`;
+  const v=d.ranuraRes;
+  return `<div class="f">${qhtml({q:L('★ La [[ranura]]: ¿cabe el móvil?','The slot: does the phone fit?'),req:true},1)}
+    <div class="opts" style="align-items:center"><label>${bi(L('Grosor de mi móvil CON funda','My phone thickness WITH case'),true)}<br><input type="number" inputmode="decimal" step="any" min="0" data-id="grosor" value="${esc(d.grosor)}"><span class="unit">mm</span></label>
+    <label>${bi(L('Ranura de mi soporte (regla de Tinkercad o plano)','My stand slot (Tinkercad ruler or drawing)'),true)}<br><input type="number" inputmode="decimal" step="any" min="0" data-id="ranuraMed" value="${esc(d.ranuraMed)}"><span class="unit">mm</span></label></div>
+    ${res}
+    <div class="q" style="margin-top:10px"><div class="txt">${bi(L('Entonces el móvil…','So the phone…'))}</div></div>
+    <div class="opts">${[['bien',L('✔ cabe bien','fits well')],['justo',L('◐ queda justo','is tight')],['nocabe',L('✘ no cabe','does not fit')],['suelto',L('↔ queda suelto','is loose')]].map(o=>optHTML('ranuraRes',o[0],o[1],v===o[0])).join('')}</div></div>`;
+}
+const MODS = [
+  ['orificio', L('🔌 Orificio para el cable','Cable hole'), 'cargar'],
+  ['antides', L('🧲 Zona para antideslizante','Non-slip area'), 'quieto'],
+  ['reducir', L('♻️ Reducir material','Use less material'), 'ahorro'],
+  ['nombre', L('🔤 Nombre o adorno','Name or decoration'), 'personal'],
+  ['otra', L('➕ Otra','Other'), ''],
+];
+const PARA = [['cargar',L('cargar el móvil mientras se usa','charging while in use')],['quieto',L('que no se mueva ni resbale','so it does not move or slip')],['ahorro',L('gastar menos plástico (más barato)','use less plastic (cheaper)')],['personal',L('personalizarlo (es un [[deseo]])','personalise it (it is a wish)')],['otro',L('otra cosa','something else')]];
+function modsHTML(f, d){
+  const sel=d.modsSel||[];
+  const multi = S.mode==='n';
+  const head = qhtml({q: multi?L('★ ¿Qué cambios hiciste? (marca todos)','What changes did you make? (tick all)'):L('★ ¿Qué cambio hiciste?','What change did you make?'), req:true},1);
+  const opts = `<div class="opts">${MODS.map(m=>optHTML('modsSel', m[0], m[1], sel.includes(m[0]), multi?'checkbox':'radio')).join('')}</div>`;
+  const det = sel.map(k=>{ const m=MODS.find(x=>x[0]===k); if(!m) return '';
+    const tid='modTxt_'+k, pid='modPara_'+k; const pv=d[pid];
+    return `<div class="cardv" style="margin-top:10px"><div class="sub" style="margin-top:0">${bi(m[1],true)}</div>
+      <div class="q"><div class="txt">${bi(L('¿Qué hiciste? (dónde y cuánto mide)','What did you do? (where and how big)'))}</div></div>
+      <input type="text" data-id="${tid}" value="${esc(d[tid])}" autocomplete="off">
+      ${bankHTML(tid, k==='orificio'?[L('orificio de 12 mm en la base','12 mm hole in the base'),L('hueco para el cable en la pestaña','cable gap in the lip')]:k==='antides'?[L('3 rectángulos debajo de la base','3 rectangles under the base'),L('zona plana para pegar goma','flat area to glue rubber')]:k==='reducir'?[L('hueco en el respaldo','hole in the back'),L('he hecho la pieza más fina','I made the part thinner')]:k==='nombre'?[L('mi nombre en el lateral','my name on the side'),L('un dibujo en el respaldo','a drawing on the back')]:[])}
+      <div class="q" style="margin-top:8px"><div class="txt">${bi(L('¿Para qué sirve?','What is it for?'))}</div></div>
+      <div class="opts">${PARA.map(p=>optHTML(pid,p[0],p[1],pv===p[0])).join('')}</div>
+      ${pv && m[2] && pv===m[2] ? `<div class="ok">✔ ${bi(L('¡Bien relacionado!','Well matched!'),true)}</div>`:''}
+      ${k==='nombre' ? `<p class="note">${bi(L('Ojo: el nombre o adorno es un deseo, no una necesidad. Si solo haces esto, añade otro cambio.','Note: a name is a wish, not a need. If this is your only change, add another.'))}</p>`:''}
+    </div>`; }).join('');
+  return `<div class="f">${head}${opts}${det}</div>`;
+}
+function matrixHTML(f, d){
+  const crit=[['estable',L('Es estable (no se cae)','It is stable')],['facil',L('Es fácil de imprimir','It is easy to print')],['gusta',L('Me ha salido bien / lo sé modificar','It came out well / I can change it')]];
+  const tot = n => crit.reduce((s,c)=>s+(+d[`mx_${c[0]}_${n}`]||0),0);
+  return `<div class="f">${qhtml({q:L('Puntúa cada soporte: 1 = mal · 2 = regular · 3 = bien','Score each stand: 1 = poor · 2 = OK · 3 = good')},0)}<div class="tscroll"><table class="t"><thead><tr><th>${bi(L('Criterio','Criterion'),true)}</th>${[1,2,3].map(n=>`<th class="c">${bi(L(`Soporte ${n}`,`Stand ${n}`),true)}</th>`).join('')}</tr></thead><tbody>
+  ${crit.map(c=>`<tr><td>${bi(c[1],true)}</td>${[1,2,3].map(n=>{const id=`mx_${c[0]}_${n}`; return `<td class="c"><select class="inp" data-id="${id}" aria-label="${esc(tx(c[1]))} ${n}"><option value=""></option>${[1,2,3].map(x=>`<option ${String(d[id])===String(x)?'selected':''}>${x}</option>`).join('')}</select></td>`;}).join('')}</tr>`).join('')}
+  <tr><th>TOTAL</th>${[1,2,3].map(n=>`<th class="c">${tot(n)||''}</th>`).join('')}</tr></tbody></table></div></div>`;
+}
+function guionHTML(f, d){
+  const parts=[L('1 · El problema de mi cliente','1 · My client\'s problem'),L('2 · Mi soporte','2 · My stand'),L('3 · Cómo lo hice (Tinkercad → impresora 3D)','3 · How I made it'),L('4 · ¿Por qué comprarlo? ¿Cuánto cuesta?','4 · Why buy it? How much?')];
+  return `<div class="f">${qhtml({q:L('★ Guion: 4 partes de unos 10 segundos','Script: 4 parts of about 10 seconds'),req:true},1)}<div class="tscroll"><table class="t"><thead><tr><th>${bi(L('Parte','Part'),true)}</th><th>${bi(L('Qué se ve (foto, pieza…)','What we see'),true)}</th><th>${bi(L('★ Qué digo o escribo','What I say or write'),true)}</th></tr></thead><tbody>
+  ${parts.map((p,i)=>`<tr><td>${bi(p)}</td><td><input type="text" data-id="g${i+1}a" value="${esc(d['g'+(i+1)+'a'])}"></td><td><input type="text" data-id="g${i+1}b" value="${esc(d['g'+(i+1)+'b'])}"></td></tr>`).join('')}</tbody></table></div></div>`;
+}
+const FASES=[['1',L('1 · Problema','1 · Problem')],['2',L('2 · Información','2 · Research')],['3',L('3 · Diseño','3 · Design')],['4',L('4 · Planificación','4 · Planning')],['5',L('5 · Fabricación','5 · Manufacturing')],['6',L('6 · Evaluación','6 · Evaluation')],['7',L('7 · Difusión','7 · Presenting')]];
+function fasesItems(){
+  const all=[
+    {k:'a',t:L('Leer mi tarjeta y saber qué necesita el cliente','Reading my card and knowing what the client needs'),ok:'1',r:1},
+    {k:'b',t:L('Hacer las prácticas de SketchUp y Tinkercad con vídeos e instrucciones','Doing the SketchUp and Tinkercad exercises'),ok:'2'},
+    {k:'c',t:L('Elegir uno de mis 3 soportes con criterios','Choosing one of my 3 stands with criteria'),ok:'3'},
+    {k:'d',t:L('Dibujar el croquis de mis cambios','Drawing the sketch of my changes'),ok:'3',r:1},
+    {k:'e',t:L('Preparar el laminado (tiempo, plástico, posición)','Preparing the slicing'),ok:'4'},
+    {k:'f',t:L('Imprimir la pieza en la impresora 3D','Printing the part on the 3D printer'),ok:'5',r:1},
+    {k:'g',t:L('Comprobar si le sirve a mi cliente','Checking if it works for my client'),ok:'6',r:1},
+    {k:'h',t:L('Hacer el anuncio o la presentación','Making the ad or presentation'),ok:'7'},
+  ];
+  return S.mode==='r' ? all.filter(x=>x.r) : all;
+}
+function fasesHTML(f, d){
+  const items=fasesItems(); const show = !!d._faChk;
+  return `<div class="f">${qhtml({q:L('★ ¿En qué fase del [[proceso tecnológico]] está cada cosa que hiciste?','Which phase is each thing you did in?'),req:true},1)}
+  <div class="tscroll"><table class="t"><tbody>${items.map(it=>{ const v=d['fa_'+it.k]; const fb = show && v ? (v===it.ok?' <span class="ok">✔</span>':' <span class="bad">✘</span>') : '';
+    return `<tr><td>${bi(it.t)}</td><td style="min-width:12em"><select class="inp" data-id="fa_${it.k}" aria-label="${esc(tx(it.t))}"><option value="">—</option>${FASES.map(fz=>`<option value="${fz[0]}" ${v===fz[0]?'selected':''}>${esc(S.lang==='en'?fz[1].en:fz[1].es)}</option>`).join('')}</select>${fb}</td></tr>`; }).join('')}</tbody></table></div>
+  <div class="row" style="margin-top:10px"><button type="button" class="btn" data-act="faChk">✔ ${S.lang==='en'?'Check':'Comprobar'}</button> ${show?`<span class="note">${bi(L(`Aciertos: ${items.filter(it=>d['fa_'+it.k]===it.ok).length} de ${items.length}. Cambia los ✘ y vuelve a comprobar.`,`Correct: ${items.filter(it=>d['fa_'+it.k]===it.ok).length} of ${items.length}.`),true)}</span>`:''}</div></div>`;
+}
+function caritaHTML(f, d){
+  const cols=[['1','😟',L('Mal','Poor')],['2','😐',L('Regular','OK')],['3','🙂',L('Bien','Good')],['4','😀',L('Muy bien','Very good')]];
+  return `<div class="f">${qhtml({q:L('★ ¿Cómo me ha ido?','How did it go?'),req:true},1)}<div class="tscroll"><table class="t"><thead><tr><th></th>${cols.map(c=>`<th class="c">${c[1]}<br><small>${bi(c[2],true)}</small></th>`).join('')}</tr></thead><tbody>
+  ${f.rows.map(r=>`<tr><td>${bi(r[1],true)}</td>${cols.map(c=>`<td class="c"><input type="radio" name="${f.id}_${r[0]}" value="${c[0]}" aria-label="${esc(tx(r[1]))} ${esc(tx(c[2]))}" ${d[f.id+'_'+r[0]]===c[0]?'checked':''}></td>`).join('')}</tr>`).join('')}</tbody></table></div></div>`;
+}
+function downloadHTML(d){
+  const sel=d.elegido; const r = S.mode==='r' ? '_refuerzo' : '';
+  const btn = n => `<a class="btn ${String(n)===String(sel)?'pri':''}" href="croquis/croquis_soporte${n}${r}.pdf" target="_blank" rel="noopener" download>⬇️ ${bi(L(`Hoja del soporte ${n}`,`Sheet for stand ${n}`),true)}</a>`;
+  return `<div class="f"><div class="q"><div class="txt">${bi(L('Descarga la hoja de TU soporte (2 caras: dibujo · pasos y ejemplos)','Download YOUR stand\'s sheet (2 pages: drawing · steps and examples)'))}</div></div>
+   ${sel?`<p>${bi(L(`Tu soporte elegido es el <b>${sel}</b> (está en azul).`,`Your chosen stand is number ${sel} (in blue).`))}</p>`:`<p class="bad">${bi(L('Primero elige tu soporte en la página «Elijo mi soporte».','First choose your stand on the "I choose my stand" page.'))}</p>`}
+   <div class="opts">${btn(1)}${btn(2)}${btn(3)}</div>
+   <p class="note">${bi(L('Imprime al 100 % (sin «ajustar a página») y a doble cara. Las vistas están a tamaño real (1:1); la escala de la perspectiva viene en la hoja.','Print at 100 % (no "fit to page"), double-sided. The views are real size (1:1); the isometric scale is on the sheet.'))}</p></div>`;
+}
+function entregaHTML(d){
+  const list = PAGES.filter(p=>p.id!=='entregar').map((p,i)=>{ const m=missing(p,d); return `<tr><td>${p.icon} ${bi(p.title,true)}</td><td>${m.length?`<span class="bad">✘ ${bi(L(`faltan ${m.length}`,`${m.length} missing`),true)}</span> <button type="button" class="btn sm" data-goto="${PAGES.indexOf(p)}">${S.lang==='en'?'Go':'Ir'}</button>`:'<span class="ok">✔</span>'}</td></tr>`; }).join('');
+  const nph = Object.keys(S.photos).length;
+  return `<div class="f"><div class="sub" style="margin-top:0">${bi(L('¿Está todo?','Is everything done?'))}</div><table class="t">${list}</table>
+   <p class="note">${bi(L(`Fotos y capturas añadidas: ${nph}. Las fotos solo están en este ordenador: añádelas aquí antes de sacar el PDF.`,`Photos added: ${nph}. Photos are only on this computer: add them here before making the PDF.`))}</p>
+   <div class="row" style="display:flex;flex-wrap:wrap;gap:10px;margin-top:12px">
+    <button type="button" class="btn pri" data-act="pdf">🖨️ ${S.lang==='en'?'Make PDF':'Sacar PDF'}</button>
+    <button type="button" class="btn" data-act="save">💾 ${S.lang==='en'?'Save code':'Guardar código'}</button>
+    <button type="button" class="btn" data-act="file">📦 ${S.lang==='en'?'Download full file (with photos)':'Descargar archivo completo (con fotos)'}</button>
+   </div></div>`;
+}
+function photoSlot(id){
+  const src=S.photos[id];
+  const has = !!src;
+  return `<div class="slot" tabindex="0" data-slot="${id}" aria-label="Zona de imagen: pulsa y pega con Ctrl+V">
+    ${has?`<img src="${src}" alt="imagen añadida">`:`<p class="note" style="margin:4px 0 10px">${bi(L('Toca un botón, o haz clic aquí y pega una captura con <b>Ctrl + V</b>.','Tap a button, or click here and paste a screenshot with Ctrl + V.'))}</p>`}
+    <div class="btns">
+      <label class="btn sm">📷 ${S.lang==='en'?'Take photo':'Hacer foto'}<input type="file" accept="image/*" capture="environment" data-file="${id}" hidden></label>
+      <label class="btn sm">🖼️ ${S.lang==='en'?'Choose image':'Elegir imagen'}<input type="file" accept="image/*" data-file="${id}" hidden></label>
+      <button type="button" class="btn sm" data-paste="${id}">📋 ${S.lang==='en'?'Paste':'Pegar'}</button>
+      ${has?`<button type="button" class="btn sm del" data-delphoto="${id}">🗑️ ${S.lang==='en'?'Remove':'Quitar'}</button>`:''}
+    </div>
+    ${has?'':`<p class="note" style="margin:8px 0 0">${bi(L('Solo fotos de la pieza, de la hoja o capturas. Nunca caras.','Only photos of the part, the sheet or screenshots. Never faces.'))}</p>`}
+  </div>`;
+}
+
+/* ---------- render: página ---------- */
+function faltaHTML(p,d){
+  if(p.id==='entregar') return '';
+  const m=missing(p,d);
+  return m.length?`<div class="falta"><b>${S.lang==='en'?'Still missing (★):':'Te falta (★):'}</b><ul style="margin:.3em 0 0">${m.map(f=>`<li>${bi(reqLabel(f),true)}</li>`).join('')}</ul></div>`:`<div class="done">✅ ${bi(L('¡Página terminada! Recuerda guardar tu código.','Page finished! Remember to save your code.'),true)}</div>`;
+}
+function refreshDynamic(){
+  const d=S.data, p=PAGES[S.page];
+  document.querySelectorAll('[data-calc]').forEach(el=>{
+    const k=el.dataset.calc; if(k==='ranura'){ el.innerHTML=ranuraCalc(d); return; }
+    const f=p.fields.find(x=>x._k===k); if(f) el.innerHTML=f.html(d);
+  });
+  const fb=document.getElementById('faltaBox'); if(fb) fb.innerHTML=faltaHTML(p,d);
+  renderNav();
+}
+let activeSlot=null;
+function renderNav(){
+  const d=S.data;
+  const items = PAGES.map((p,i)=>{ const st = pageDone(p,d)?'✅':(p.fields.some(f=>f.id && d[f.id]!==undefined)?'◐':'○'); return {i,p,st}; });
+  const side=document.getElementById('side');
+  const btns=side.querySelectorAll('button[data-goto]');
+  if(btns.length===items.length && side.dataset.lang===S.lang){
+    items.forEach(({i,st},k)=>{ const bt=btns[k]; bt.classList.toggle('on', i===S.page); const e=bt.querySelector('.st'); if(e.textContent!==st) e.textContent=st; });
+    const ms=document.getElementById('mobsel'); [...ms.options].forEach((o,k)=>{ const t=`${items[k].st} ${k+1}. ${tx(items[k].p.title)}`; if(o.textContent!==t) o.textContent=t; }); ms.value=String(S.page);
+  } else {
+  side.dataset.lang=S.lang;
+  side.innerHTML = items.map(({i,p,st})=>`<button type="button" class="${i===S.page?'on':''}" data-goto="${i}"><span class="st">${st}</span><span>${p.icon} ${bi(p.title)}</span></button>`).join('')
+    + `<div style="border-top:1px solid var(--line);margin-top:8px;padding-top:8px"><button type="button" data-act="teacher"><span class="st">👩‍🏫</span><span>${bi(L('Profesor/a','Teacher'))}</span></button></div>`;
+  document.getElementById('mobsel').innerHTML = items.map(({i,p,st})=>`<option value="${i}" ${i===S.page?'selected':''}>${st} ${i+1}. ${esc(tx(p.title))}</option>`).join('');
+  }
+  const done = items.filter(x=>x.st==='✅').length;
+  document.getElementById('prog').style.width = (100*done/PAGES.length)+'%';
+}
+function renderPage(keepScroll){
+  const d=S.data, p=PAGES[S.page], col=COLORS[S.page%COLORS.length];
+  const fs = p.fields.filter(f=>vis(f,d));
+  const stepMode = S.mode==='r';
+  const blocks = fs.map(f=>fieldHTML(f,d));
+  let step = S.step[p.id]||0; if(step>=blocks.length) step=blocks.length-1; if(step<0) step=0;
+  const m = missing(p,d);
+  const body = stepMode
+    ? blocks.map((b,i)=>`<div data-blk="${i}" ${i===step?'':'hidden'}>${b}</div>`).join('') +
+      `<div class="stepnav"><button type="button" class="btn" data-step="-1" ${step===0?'disabled':''}>⬅️ ${S.lang==='en'?'Back':'Anterior'}</button><button type="button" class="btn pri" data-step="1">${step>=blocks.length-1?(S.lang==='en'?'Finish page ➡️':'Terminar página ➡️'):(S.lang==='en'?'Next ➡️':'Siguiente ➡️')}</button></div><div class="stepcount">${step+1} / ${blocks.length}</div>`
+    : blocks.join('');
+  const tipoTxt = p.tipo==='📄'?L('📄 Se puede hacer sin ordenador','Can be done without a computer'):L('🖥️ Con ordenador','With a computer');
+  document.getElementById('page').innerHTML = `
+   <section class="page" aria-labelledby="ph1">
+    <div class="ph" style="background:${col}"><h1 id="ph1">${p.icon} ${S.page+1}. ${bi(p.title)}</h1><span class="tipo">${esc(tx(tipoTxt))}</span></div>
+    <div class="que"><div><b>${S.lang==='en'?'What will you do?':'¿Qué vas a hacer?'}</b>${bi(p.que)} <button type="button" class="say" data-say="${esc(sayText(p.que))}" aria-label="Escuchar">🔊</button></div><div><b>${S.lang==='en'?'What is it for?':'¿Para qué sirve?'}</b>${bi(p.para)}</div></div>
+    ${(()=>{ const ps=(S.mode==='r'&&p.pasosR)||p.pasos; return ps?`<div class="pasos"><b>${S.lang==='en'?'Steps':'Pasos'}</b> <button type="button" class="say" data-say="${esc(ps.map(sayText).join('. '))}" aria-label="Escuchar los pasos">🔊</button><ol>${ps.map(s=>`<li>${bi(s,true)}</li>`).join('')}</ol></div>`:''; })()}
+    ${p.ej?`<div class="ej"><b class="t">💡 ${bi(p.ej.t,true)}</b>${bi(p.ej.b)}</div>`:''}
+    ${p.help?`<details class="help"><summary>💡 ${bi(p.help.t,true)}</summary>${p.help.svg}</details>`:''}
+    <div id="fields">${body}</div>
+    <div id="faltaBox">${faltaHTML(p,d)}</div>
+    <div class="pfoot">
+      <button type="button" class="btn" data-goto="${S.page-1}" ${S.page===0?'disabled':''}>⬅️ ${S.lang==='en'?'Previous page':'Página anterior'}</button>
+      <button type="button" class="btn pri" data-goto="${S.page+1}" ${S.page===PAGES.length-1?'disabled':''}>${S.lang==='en'?'Next page':'Página siguiente'} ➡️</button>
+    </div>
+   </section>`;
+  renderNav();
+  if(!keepScroll) window.scrollTo({top:0});
+}
+
+/* ---------- eventos ---------- */
+function setVal(id, val){ if(val===''||val==null) delete S.data[id]; else S.data[id]=val; persist(); }
+function onInput(e){
+  const t=e.target;
+  if(t.dataset && t.dataset.file) return;
+  if(t.dataset && t.dataset.id){
+    setVal(t.dataset.id, t.value);
+    if(t.tagName==='SELECT') rerender(); else refreshDynamic();
+    return;
+  }
+  if(t.type==='radio' || t.type==='checkbox'){
+    const name=t.name;
+    if(name.startsWith('rq__')){ const k=name.slice(4); const o=Object.assign({},S.data.rq||{}); o[k]=t.value; S.data.rq=o; }
+    else if(name.includes('__')){ const [id,row]=name.split('__'); const o=Object.assign({},S.data[id]||{}); o[row]=t.value; S.data[id]=o; }
+    else if(name==='modsSel' && t.type==='radio'){ S.data.modsSel=[t.value]; }
+    else if(t.type==='checkbox'){ const a=new Set(S.data[name]||[]); t.checked?a.add(t.value):a.delete(t.value); S.data[name]=[...a]; if(!S.data[name].length) delete S.data[name]; }
+    else S.data[name]=t.value;
+    persist(); rerender();
+  }
+}
+function rerender(){ const y=window.scrollY; renderPage(true); window.scrollTo(0,y); }
+document.addEventListener('change', onInput);
+document.addEventListener('input', e=>{ const t=e.target; if(t.dataset && t.dataset.id && (t.tagName==='TEXTAREA' || t.type==='text' || t.type==='number')){ setVal(t.dataset.id, t.value); refreshDynamic(); } });
+function updateFalta(){ renderNav(); }
+
+document.addEventListener('click', async e=>{
+  const b=e.target.closest('button, a, .slot');
+  // glosario
+  const g=e.target.closest('.gl'); if(g){ showGlos(g); return; } else hideGlos();
+  if(!b) return;
+  if(b.classList.contains('slot')){ activeSlot=b.dataset.slot; return; }
+  if(b.dataset.goto!==undefined){ const i=+b.dataset.goto; if(i>=0 && i<PAGES.length){ go(i); } return; }
+  if(b.dataset.say!==undefined){ speak(b.dataset.say); return; }
+  if(b.dataset.step){ stepMove(+b.dataset.step); return; }
+  if(b.dataset.bank){ const id=b.dataset.bank; const w=b.dataset.word; const el=document.querySelector(`[data-id="${CSS.escape(id)}"]`);
+     let nv; if(el && el.tagName==='TEXTAREA' && el.value.trim()) nv = el.value.trim()+' '+w; else nv=w; setVal(id,nv); rerender(); return; }
+  if(b.dataset.paste){ activeSlot=b.dataset.paste; await pasteFromClipboard(b.dataset.paste); return; }
+  if(b.dataset.delphoto){ await delPhoto(b.dataset.delphoto); return; }
+  const act=b.dataset.act;
+  if(act==='faChk'){ S.data._faChk=1; persist(); rerender(); return; }
+  if(act==='pdf'){ doPrint(false); return; }
+  if(act==='save'){ openSave(); return; }
+  if(act==='file'){ downloadFull(); return; }
+  if(act==='teacher'){ openTeacher(); return; }
+});
+document.addEventListener('focusin', e=>{ const s=e.target.closest && e.target.closest('.slot'); if(s) activeSlot=s.dataset.slot; });
+document.addEventListener('change', async e=>{ const t=e.target; if(t.dataset && t.dataset.file && t.files && t.files[0]){ await setPhoto(t.dataset.file, t.files[0]); t.value=''; } });
+document.addEventListener('paste', async e=>{
+  const items=[...(e.clipboardData && e.clipboardData.items || [])]; const it=items.find(i=>i.type.startsWith('image/'));
+  if(!it) return;
+  const id = activeSlot || (document.querySelector('[data-slot]')||{}).dataset?.slot;
+  if(!id){ toast(L('En esta página no hay sitio para imágenes.','There is no image box on this page.')); return; }
+  e.preventDefault(); await setPhoto(id, it.getAsFile());
+});
+async function pasteFromClipboard(id){
+  try{
+    if(!navigator.clipboard || !navigator.clipboard.read) throw 0;
+    const items = await navigator.clipboard.read();
+    for(const it of items){ const tp=it.types.find(t=>t.startsWith('image/')); if(tp){ await setPhoto(id, await it.getType(tp)); return; } }
+    toast(L('No hay ninguna imagen copiada. Haz una captura (Win + Shift + S) y vuelve a pulsar.','No image copied. Take a screenshot (Win + Shift + S) and try again.'));
+  }catch(err){ toast(L('Haz clic en el recuadro y pulsa Ctrl + V.','Click the box and press Ctrl + V.')); const s=document.querySelector(`[data-slot="${CSS.escape(id)}"]`); if(s) s.focus(); }
+}
+document.getElementById('mobsel').addEventListener('change', e=>go(+e.target.value));
+document.getElementById('lang').addEventListener('change', e=>{ S.lang=e.target.value; persist(); renderPage(true); });
+document.getElementById('bSave').addEventListener('click', openSave);
+document.getElementById('bLoad').addEventListener('click', openLoad);
+document.getElementById('bMore').addEventListener('click', openMore);
+
+function stepMove(dir){
+  const p=PAGES[S.page]; const n=document.querySelectorAll('[data-blk]').length; let s=(S.step[p.id]||0)+dir;
+  if(s>=n){ S.step[p.id]=n-1; if(S.page<PAGES.length-1) go(S.page+1); return; }
+  S.step[p.id]=Math.max(0,s); renderPage(true);
+  const el=document.querySelector('[data-blk]:not([hidden])'); if(el) el.scrollIntoView({block:'center'});
+}
+function go(i){
+  const prev=S.page; S.page=i; try{ localStorage.setItem(APP+':page', i); }catch(e){}
+  renderPage();
+  if(S.dirty && Date.now()-S.lastCode > 20*60*1000 && prev!==i){ toast(L('💾 ¿Has guardado tu código hoy? Pulsa «Guardar código».','Have you saved your code today? Press "Save code".'), 5000); S.lastCode = Date.now()-10*60*1000; }
+}
+
+/* ---------- glosario emergente ---------- */
+let glEl=null;
+function showGlos(btn){ hideGlos(); const k=btn.dataset.gl; const o=GLOS[k]; if(!o) return; glEl=document.createElement('div'); glEl.className='glpop'; glEl.innerHTML=`<b>${esc(k)}</b> <button type="button" class="say" data-say="${esc(sayText(o))}">🔊</button><br>${bi(o)}`; document.body.appendChild(glEl); const r=btn.getBoundingClientRect(); glEl.style.left=Math.max(8,Math.min(window.scrollX+r.left, window.scrollX+document.documentElement.clientWidth-340))+'px'; glEl.style.top=(window.scrollY+r.bottom+6)+'px'; }
+function hideGlos(){ if(glEl){ glEl.remove(); glEl=null; } }
+
+/* ---------- voz ---------- */
+function speak(text){
+  try{ if(!('speechSynthesis' in window)){ toast(L('Este navegador no puede leer en voz alta.','This browser cannot read aloud.')); return; }
+    speechSynthesis.cancel(); const u=new SpeechSynthesisUtterance(text); const lang=S.lang==='en'?'en-GB':'es-ES'; u.lang=lang; u.rate=0.9;
+    const v=speechSynthesis.getVoices().find(v=>v.lang && v.lang.toLowerCase().startsWith(lang.slice(0,2))); if(v) u.voice=v; speechSynthesis.speak(u);
+  }catch(e){}
+}
+
+/* ---------- avisos y modales ---------- */
+function toast(o, ms){ const t=document.createElement('div'); t.className='toast'; t.innerHTML=bi(o); document.body.appendChild(t); setTimeout(()=>t.remove(), ms||2600); }
+function modal(html){ const m=document.createElement('div'); m.className='modal'; m.innerHTML=`<div class="box" role="dialog" aria-modal="true">${html}</div>`; m.addEventListener('click',e=>{ if(e.target===m || e.target.closest('[data-close]')) m.remove(); }); document.body.appendChild(m); return m; }
+
+async function openSave(){
+  const code = await makeCode(S.data);
+  const m = modal(`<h2>💾 ${bi(L('Guardar mi progreso','Save my progress'),true)}</h2>
+   <ol class="guide"><li>${bi(L('Pulsa <b>📋 Copiar</b>.','Press Copy.'))}</li><li>${bi(L('Abre tu <b>Drive</b> (cuenta @g.educaand.es) → <b>Nuevo → Documento de Google</b>. Si ya lo tienes, ábrelo.','Open your Drive → New → Google Doc. If you already have it, open it.'))}</li><li>${bi(L('Pega con <b>Ctrl + V</b>. Ponle de nombre «Código memoria Tecno». Si ya había un código, pega el nuevo debajo con la fecha.','Paste with Ctrl + V. Name it "Código memoria Tecno". Paste the new code below with the date.'))}</li></ol>
+   <textarea class="code" readonly id="codeTa">${esc(code)}</textarea>
+   <p class="note">${bi(L(`Este código guarda tus respuestas (${code.length} letras). Las fotos NO van en el código: añádelas al final, antes de sacar el PDF, o usa «Descargar archivo completo».`,`This code saves your answers. Photos are NOT in the code.`))}</p>
+   <div class="row"><button class="btn pri" id="cpy">📋 ${S.lang==='en'?'Copy':'Copiar'}</button><button class="btn" data-close>✖ ${S.lang==='en'?'Close':'Cerrar'}</button></div>`);
+  m.querySelector('#cpy').addEventListener('click', async ()=>{ const ta=m.querySelector('#codeTa'); try{ await navigator.clipboard.writeText(ta.value); }catch(e){ ta.select(); document.execCommand && document.execCommand('copy'); } S.lastCode=Date.now(); S.dirty=false; try{ localStorage.setItem(APP+':lastcode', S.lastCode);}catch(e){} toast(L('✔ Copiado. Ahora pégalo en tu documento de Drive.','Copied. Now paste it in your Drive document.'),3500); });
+}
+function openLoad(){
+  const m = modal(`<h2>📂 ${bi(L('Continuar con mi código','Continue with my code'),true)}</h2>
+   <ol class="guide"><li>${bi(L('Abre tu documento «Código memoria Tecno» en Drive.','Open your "Código memoria Tecno" document in Drive.'))}</li><li>${bi(L('Copia el <b>último</b> código (empieza por SDA1).','Copy the LAST code (starts with SDA1).'))}</li><li>${bi(L('Pégalo aquí y pulsa <b>Cargar</b>.','Paste it here and press Load.'))}</li></ol>
+   <textarea class="code" id="inTa" placeholder="SDA1Z-..."></textarea>
+   <div class="row"><button class="btn pri" id="ld">✔ ${S.lang==='en'?'Load':'Cargar'}</button><label class="btn">📦 ${S.lang==='en'?'Open full file':'Abrir archivo completo'}<input type="file" accept=".memoria,application/json" id="inFile" hidden></label><button class="btn" data-close>✖ ${S.lang==='en'?'Close':'Cerrar'}</button></div>
+   <p class="note">${bi(L('Ojo: al cargar, se sustituye lo que hay ahora en este ordenador.','Note: loading replaces what is on this computer now.'))}</p>`);
+  m.querySelector('#ld').addEventListener('click', async ()=>{
+    try{ const obj=await readCode(m.querySelector('#inTa').value); S.data=obj.d||{}; applyMode(); persist(); S.lastCode=Date.now(); S.dirty=false; m.remove(); go(firstPending()); toast(L('✔ ¡Memoria recuperada! Sigue donde lo dejaste.','Report restored! Continue where you left off.'),3500); }
+    catch(err){ toast(L(err.message==='incompleto'?'El código está incompleto: cópialo entero, desde SDA1 hasta el final.':err.message==='navegador'?'Este navegador es antiguo. Usa Chrome o Edge.':'Ese código no es válido. Copia el código completo.','That code is not valid. Copy the whole code.'),4500); }
+  });
+  m.querySelector('#inFile').addEventListener('change', async e=>{ const f=e.target.files[0]; if(!f) return; try{ const obj=JSON.parse(await f.text()); if(obj.app!==APP) throw 0; S.data=obj.d||{}; applyMode(); persist(); await idbClear(); S.photos={}; for(const [k,v] of Object.entries(obj.f||{})){ S.photos[k]=v; await idbPut(k,v); } m.remove(); go(firstPending()); toast(L('✔ Archivo cargado con sus fotos.','File loaded with photos.'),3500);}catch(err){ toast(L('Ese archivo no es una memoria válida.','That file is not a valid report.'),4000);} });
+}
+function firstPending(){ const i=PAGES.findIndex(p=>!pageDone(p,S.data)); return i<0?PAGES.length-1:i; }
+function downloadFull(){
+  const obj={app:APP, v:VERSION, m:S.mode, d:S.data, f:S.photos, fecha:new Date().toISOString()};
+  const blob=new Blob([JSON.stringify(obj)],{type:'application/json'});
+  const name=(S.data.nombre1||'memoria').normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^A-Za-z0-9]+/g,'_').slice(0,40);
+  const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=`${name}.memoria`; document.body.appendChild(a); a.click(); setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},1000);
+  modal(`<h2>📦 ${bi(L('Archivo completo descargado','Full file downloaded'),true)}</h2><ol class="guide"><li>${bi(L('Busca el archivo en <b>Descargas</b>.','Find the file in Downloads.'))}</li><li>${bi(L('Súbelo a tu <b>Drive</b> (Nuevo → Subir archivo).','Upload it to your Drive (New → File upload).'))}</li><li>${bi(L('Otro día: descárgalo de Drive y ábrelo con 📂 Continuar → Abrir archivo completo.','Another day: download it and open it with Continue → Open full file.'))}</li></ol><div class="row"><button class="btn pri" data-close>OK</button></div>`);
+}
+function openMore(){
+  const m = modal(`<h2>☰ ${bi(L('Más opciones','More options'),true)}</h2>
+   <div class="row" style="flex-direction:column;align-items:stretch">
+    <button class="btn" data-x="pdf">🖨️ ${bi(L('Sacar PDF de mi memoria','Make a PDF of my report'),true)}</button>
+    <button class="btn" data-x="blank">📄 ${bi(L('Imprimir la memoria en blanco (para hacerla a mano)','Print a blank report (to do by hand)'),true)}</button>
+    <button class="btn" data-x="file">📦 ${bi(L('Descargar archivo completo (con fotos)','Download full file (with photos)'),true)}</button>
+    <button class="btn" data-x="teacher">👩‍🏫 ${bi(L('Profesor/a: ver la memoria de un código','Teacher: view a report from a code'),true)}</button>
+    <button class="btn" data-x="theme">🌓 ${bi(L('Cambiar modo claro / oscuro','Toggle light / dark mode'),true)}</button>
+    <button class="btn del" data-x="reset">🗑️ ${bi(L('Borrar todo lo de este ordenador','Delete everything on this computer'),true)}</button>
+   </div><div class="row"><button class="btn" data-close>✖ ${S.lang==='en'?'Close':'Cerrar'}</button></div>`);
+  m.addEventListener('click', async e=>{ const x=e.target.closest('[data-x]'); if(!x) return; const a=x.dataset.x; m.remove();
+    if(a==='pdf') doPrint(false); if(a==='blank') doPrint(true); if(a==='file') downloadFull(); if(a==='teacher') openTeacher();
+    if(a==='theme'){ const r=document.documentElement; const cur=r.getAttribute('data-theme') || (matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'); r.setAttribute('data-theme', cur==='dark'?'light':'dark'); try{localStorage.setItem(APP+':theme', r.getAttribute('data-theme'));}catch(e){} }
+    if(a==='reset'){ const c=modal(`<h2>🗑️ ${bi(L('¿Seguro?','Are you sure?'),true)}</h2><p>${bi(L('Se borran las respuestas y las fotos de ESTE ordenador. Tu código guardado en Drive no se borra.','Answers and photos on THIS computer are deleted. Your code in Drive is not deleted.'))}</p><div class="row"><button class="btn del" id="yes">🗑️ ${S.lang==='en'?'Delete':'Borrar'}</button><button class="btn" data-close>${S.lang==='en'?'Cancel':'Cancelar'}</button></div>`); c.querySelector('#yes').onclick=async()=>{ S.data={}; S.photos={}; await idbClear(); persist(); c.remove(); go(0); }; }
+  });
+}
+
+/* ---------- profesor ---------- */
+function openTeacher(){
+  const m = modal(`<h2>👩‍🏫 ${bi(L('Ver la memoria de un alumno','View a student\'s report'),true)}</h2>
+   <p>${bi(L('Pega el código que te ha entregado el alumno. Se abre una vista para corregir e imprimir. <b>No se modifica</b> lo guardado en este ordenador.','Paste the student\'s code. A view to mark and print opens. Nothing saved on this computer is changed.'))}</p>
+   <textarea class="code" id="tTa" placeholder="SDA1Z-..."></textarea>
+   <div class="row"><button class="btn pri" id="tGo">👁️ ${S.lang==='en'?'View':'Ver'}</button><button class="btn" data-close>✖</button></div>`);
+  m.querySelector('#tGo').addEventListener('click', async ()=>{
+    try{ const obj=await readCode(m.querySelector('#tTa').value); m.remove(); const prevMode=S.mode; S.mode=obj.m||'n'; const html=buildReport(obj.d||{}, {}, false, true); S.mode=prevMode;
+      const v=modal(`<div style="display:flex;gap:10px;justify-content:space-between;align-items:center"><h2 style="margin:0">${bi(L('Memoria de','Report of'),true)} ${esc(obj.d && obj.d.nombre1 || '—')} ${obj.m==='r'?'<span class="modebadge" style="background:var(--soft)">Refuerzo</span>':''}</h2><div><button class="btn pri" id="tPr">🖨️ PDF</button> <button class="btn" data-close>✖</button></div></div><div id="tv" class="rep" style="margin-top:10px">${html}</div>`);
+      v.querySelector('.box').style.maxWidth='900px';
+      v.querySelector('#tPr').onclick=()=>{ const prevMode2=S.mode; S.mode=obj.m||'n'; document.getElementById('print').innerHTML=buildReport(obj.d||{}, {}, false, false); S.mode=prevMode2; v.remove(); setTimeout(()=>window.print(),60); };
+    }catch(err){ toast(L('Código no válido o incompleto.','Invalid or incomplete code.'),3500); }
+  });
+}
+
+/* ---------- informe imprimible ---------- */
+function ansText(f, d){
+  const v=d[f.id];
+  switch(f.t){
+    case 'text': case 'area': case 'num': return v!==undefined && v!=='' ? esc(v)+(f.unit?' '+esc(f.unit):'') : '';
+    case 'radio': { const o=(f.opts||[]).find(o=>o[0]===v); return o?(typeof o[1]==='string'?esc(o[1]):biP(o[1])):''; }
+    case 'checks': { const a=Array.isArray(v)?v:[]; return a.map(k=>{ const o=f.opts.find(o=>o[0]===k); return o?'☑ '+biP(o[1]):''; }).join('<br>'); }
+    case 'frase': { let t=tx(f.tpl, S.lang==='en'?'en':'es'); Object.keys(f.blanks).forEach(k=>{ const x=d[f.id+'.'+k]; t=t.replace('{'+k+'}', x?`<u>${esc(x)}</u>`:'_______________'); }); return t; }
+    case 'probpick': { const c=card(v); return c?biP(c.prob):''; }
+  }
+  return '';
+}
+function buildReport(d, photos, blank, screen){
+  const D = blank ? {} : d;
+  const out=[];
+  const sigBox = `<div class="firma"><span>☐ ${biP(L('Falté a esta sesión y he hecho la ficha de recuperación','I missed this session and did the catch-up sheet'))}</span><span><b>${biP(L('Firma del profesor y fecha','Teacher signature and date'))}</b></span></div>`;
+  out.push(`<div class="pp cover"><h1>Hecho a medida</h1><p><i>Made to measure</i> · ${biP(L('Memoria técnica · Tecnología 4.º ESO','Technical report'))}${S.mode==='r'?' · R':''}</p>`);
+  PAGES.forEach((p,i)=>{
+    if(p.id==='entregar') return;
+    const fs=p.fields.filter(f=> (f.only?f.only===S.mode:true) && (blank || !f.showIf || f.showIf(D)));
+    let h = (i===0?'':`<div class="pp">`) + `<h2>${p.icon} ${i+1}. ${biP(p.title)}</h2>`;
+    fs.forEach(f=>{
+      const star = f.req?'★ ':'';
+      if(f.t==='sub'){ h+=`<div class="pq" style="font-size:11.5pt;color:#1f4f80">${biP(f.q)}</div>`; return; }
+      if(f.t==='html' || f.t==='download'){ return; }
+      if(f.t==='calc'){ if(!blank){ const t=document.createElement('div'); t.innerHTML=f.html(D); h+=`<div class="pa" style="border:0">${esc(t.textContent)}</div>`; } return; }
+      if(f.t==='card'){ const c=card(D[f.key]); h+= c?`<table><tr><th>${c.emoji} ${esc(c.nombre)}</th><td>${biP(c.prob)}</td></tr><tr><th>${biP(L('Uso','Use'))}</th><td>${biP(USO[c.uso])} · ${biP(c.pos)} · ${c.cable?'🔌':''} ⚠️ ${biP(c.extra)}</td></tr></table>`: (blank?`<div class="pq">${biP(L('Tarjeta nº','Card no.'))} ____ · ${biP(L('Nombre','Name'))} ______________</div>`:''); return; }
+      if(f.t==='photo'){ const src=photos[f.id]; h+=`<div class="pq">${biP(f.q)}</div>` + (src?`<img src="${src}" alt="">`:(blank||screen?`<div class="pbox">${biP(L('Pega aquí la foto o captura','Stick the photo or screenshot here'))}</div>`:`<div class="pa note">—</div>`)); return; }
+      if(f.t==='table'){ const o=D[f.id]||{}; h+=`<div class="pq">${star}${biP(f.q)}</div><table><tr><th></th>${f.cols.map(c=>`<th>${biP(c[1])}</th>`).join('')}</tr>${f.rows.map(r=>`<tr><td>${biP(r[1])}</td>${f.cols.map(c=>`<td style="text-align:center">${o[r[0]]===c[0]?'☒':'☐'}</td>`).join('')}</tr>`).join('')}</table>`; return; }
+      if(f.t==='radio' && blank){ h+=`<div class="pq">${star}${biP(f.q)}</div><div class="pa" style="border:0">${f.opts.map(o=>'☐ '+(typeof o[1]==='string'?esc(o[1]):biP(o[1]))).join(' &nbsp; ')}</div>`; return; }
+      if(f.t==='checks' && blank){ h+=`<div class="pq">${star}${biP(f.q)}</div><div class="pa" style="border:0">${f.opts.map(o=>'☐ '+biP(o[1])).join('<br>')}</div>`; return; }
+      if(f.t==='reqcheck'){ const c=card(D.tarjeta); const o=D.rq||{}; const mk=k=>o[k]==='si'?'✔':o[k]==='no'?'✘':o[k]==='na'?'—':'☐ ✔ ☐ ✘';
+        h+=`<div class="pq">★ ${biP(L('Requisitos de mi tarjeta','My card requirements'))}</div><table><tr><td>${biP(L('Posición del móvil','Phone position'))}${c?' ('+biP(USO[c.uso])+')':''}</td><td>${mk('pos')}</td></tr><tr><td>${biP(L('Orificio para el cable (si carga)','Cable hole (if charging)'))}</td><td>${mk('cable')}</td></tr><tr><td>⚠️ ${c?biP(c.extra):biP(L('Además…','Also…'))}</td><td>${mk('extra')}</td></tr></table>`; return; }
+      if(f.t==='ranura'){ const r={bien:L('cabe bien','fits well'),justo:L('queda justo','is tight'),nocabe:L('no cabe','does not fit'),suelto:L('queda suelto','is loose')}[D.ranuraRes];
+        h+=`<div class="pq">★ ${biP(L('La ranura','The slot'))}</div><table><tr><td>${biP(L('Grosor del móvil con funda','Phone thickness with case'))}</td><td>${D.grosor?esc(D.grosor)+' mm':'_____ mm'}</td><td>${biP(L('Ranura del soporte','Stand slot'))}</td><td>${D.ranuraMed?esc(D.ranuraMed)+' mm':'_____ mm'}</td></tr><tr><td>${biP(L('Resultado','Result'))}</td><td colspan="3">${r?biP(r):'☐ '+biP(L('cabe bien','fits well'))+' ☐ '+biP(L('justo','tight'))+' ☐ '+biP(L('no cabe','does not fit'))+' ☐ '+biP(L('suelto','loose'))}</td></tr></table>`; return; }
+      if(f.t==='mods'){ const sel=D.modsSel||[]; h+=`<div class="pq">★ ${biP(L('Mis modificaciones','My modifications'))}</div><table><tr><th>${biP(L('Cambio','Change'))}</th><th>${biP(L('Qué hice','What I did'))}</th><th>${biP(L('Para qué sirve','What it is for'))}</th></tr>${(blank?MODS:MODS.filter(m=>sel.includes(m[0]))).map(m=>{ const pp=PARA.find(p=>p[0]===D['modPara_'+m[0]]); return `<tr><td>${blank?'☐ ':''}${biP(m[1])}</td><td>${esc(D['modTxt_'+m[0]]||'')}</td><td>${pp?biP(pp[1]):''}</td></tr>`; }).join('')}</table>`; return; }
+      if(f.t==='matrix'){ const crit=[['estable',L('Es estable','Stable')],['facil',L('Fácil de imprimir','Easy to print')],['gusta',L('Me ha salido bien','Came out well')]]; h+=`<div class="pq">${biP(L('Puntuación (1–3)','Scores (1–3)'))}</div><table><tr><th></th><th>S1</th><th>S2</th><th>S3</th></tr>${crit.map(c=>`<tr><td>${biP(c[1])}</td>${[1,2,3].map(n=>`<td style="text-align:center">${esc(D[`mx_${c[0]}_${n}`]||'')}</td>`).join('')}</tr>`).join('')}</table>`; return; }
+      if(f.t==='guion'){ h+=`<div class="pq">★ ${biP(L('Guion','Script'))}</div><table><tr><th></th><th>${biP(L('Qué se ve','What we see'))}</th><th>${biP(L('Qué digo','What I say'))}</th></tr>${[1,2,3,4].map(i=>`<tr><td>${i}</td><td>${esc(D['g'+i+'a']||'')}&nbsp;</td><td>${esc(D['g'+i+'b']||'')}&nbsp;</td></tr>`).join('')}</table>`; return; }
+      if(f.t==='fases'){ const items=fasesItems(); h+=`<div class="pq">★ ${biP(L('Fase del proceso tecnológico de cada actividad','Phase of each activity'))}</div><table>${items.map(it=>{ const fz=FASES.find(x=>x[0]===D['fa_'+it.k]); return `<tr><td>${biP(it.t)}</td><td>${fz?biP(fz[1]):'__________'}</td></tr>`; }).join('')}</table>${blank?`<div class="note" style="font-size:8pt">1 Problema · 2 Información · 3 Diseño · 4 Planificación · 5 Fabricación · 6 Evaluación · 7 Difusión</div>`:''}`; return; }
+      if(f.t==='carita'){ const cols=['😟','😐','🙂','😀']; h+=`<div class="pq">★ ${biP(L('Autoevaluación','Self-assessment'))}</div><table><tr><th></th>${cols.map(c=>`<th>${c}</th>`).join('')}</tr>${f.rows.map(r=>`<tr><td>${biP(r[1])}</td>${cols.map((c,i)=>`<td style="text-align:center">${D[f.id+'_'+r[0]]===String(i+1)?'☒':'☐'}</td>`).join('')}</tr>`).join('')}</table>`; return; }
+      if(f.t==='entrega') return;
+      const a = ansText(f, D);
+      h+=`<div class="pq">${star}${biP(f.req?noStar(f.q):(f.q||''))}</div><div class="pa ${a?'':'empty'} ${f.t==='area'&&!a?'big':''}">${a}</div>`;
+    });
+    h+= sigBox + `</div>`;
+    out.push(h);
+  });
+  return out.join('');
+}
+async function doPrint(blank){
+  const photos = blank?{}:S.photos;
+  document.getElementById('print').innerHTML = buildReport(S.data, photos, blank, false);
+  const imgs=[...document.querySelectorAll('#print img')]; await Promise.all(imgs.map(i=>i.complete?0:new Promise(r=>{i.onload=i.onerror=r;})));
+  setTimeout(()=>window.print(), 80);
+}
+
+/* ---------- arranque ---------- */
+function applyMode(){
+  const q=new URLSearchParams(location.search);
+  if(q.get('r')==='1'){ S.mode='r'; S.data._modo='r'; }
+  else if(q.get('r')==='0'){ S.mode='n'; delete S.data._modo; }
+  else S.mode = S.data._modo==='r' ? 'r' : 'n';
+  document.getElementById('modebadge').hidden = S.mode!=='r';
+  document.documentElement.style.setProperty('--fs', S.mode==='r' ? '20px' : '');
+}
+(async function init(){
+  restore();
+  try{ const th=localStorage.getItem(APP+':theme'); if(th) document.documentElement.setAttribute('data-theme', th); }catch(e){}
+  applyMode();
+  document.getElementById('lang').value=S.lang;
+  try{ const pg=+localStorage.getItem(APP+':page'); if(pg>=0 && pg<PAGES.length) S.page=pg; }catch(e){}
+  S.photos = await idbAll();
+  renderPage();
+})();
+</script>
+</body>
+</html>
